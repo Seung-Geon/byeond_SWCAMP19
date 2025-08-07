@@ -1,6 +1,4 @@
-package com.ohgiraffers.section01.array;
-
-import java.util.Arrays;
+package com.ohgiraffers.section1.array;
 
 public class Application1 {
     public static void main(String[] args) {
