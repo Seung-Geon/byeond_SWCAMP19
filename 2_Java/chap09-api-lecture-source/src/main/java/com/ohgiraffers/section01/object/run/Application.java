@@ -9,7 +9,8 @@ public class Application {
 
         BookDTO book1 = new BookDTO(1, "홍길동전", "허균", 50000);
         BookDTO book2 = new BookDTO(2, "홍길동전", "허균", 50000);
-
+        
+        /* 설명. hashCode()는 객체마다 다른 것이 아니게 됨 */
         System.out.println("두 인스턴스를 == 연산자로 비교: " + (book1 == book2));
         System.out.println("두 인스턴스를 equals() 메소드로 비교: " + book1.equals(book2));
 
@@ -20,6 +21,7 @@ public class Application {
          *  기본적으로 equals()만 써도 되지만 이후 String 또는 Collection을 배우면 자바에서
          *  내부적으로 equals()와 hashCode()를 동작시키게 되므로 왠만해선 같이 오버라딩 해야 한다.
          *  (hashCode()로 같은 int값이 나오면 equals()가 true이면 동등한 것으로 판단.)
+         *  동등의 의미는 추후 중복의 의미와 유사
         * */
 
     }
