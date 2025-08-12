@@ -30,5 +30,11 @@ public class Application1 {
 
         /* 설명. Animal은 Tiger 또는 Rabbit 타입이 아니다. */
         //Tiger tr = new Animal();
+
+        an2.eat();    // 런타임 시전에는 오버라이딩 된 자식 객체의 메소드가 동작(동적 바인딩)
+        an3.eat();
+        //an3.jump(); // 컴파일 시점에는 아직 an3는 정적 바인딩만 지원
+        ((Rabbit)an3).jump();   // 강제로 알려주면(강제 다운 캐스팅) -> 추가 메소드 호출 가능
+
     }
 }
