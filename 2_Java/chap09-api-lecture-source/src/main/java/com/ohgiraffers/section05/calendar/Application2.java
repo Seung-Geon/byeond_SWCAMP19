@@ -13,7 +13,7 @@ public class Application2 {
          *  1. Timezone과 관련된 기능이 추가 (Timezone을 한국 -> 브라질 이런식으로 변경 why? 다국어 site면 지역에 맞게 변경)
          *  2. 윤년 관련 기능이 내부적으로 추가
          *  3. 날짜 및 시간을 필드 개념으로 바꿔서 불필요한 메소드 갯수를 줄임
-        * */
+         * */
 
         java.util.Calendar calendar = java.util.Calendar.getInstance();
 
