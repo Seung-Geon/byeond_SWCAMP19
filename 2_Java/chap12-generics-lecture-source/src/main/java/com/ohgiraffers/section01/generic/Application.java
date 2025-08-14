@@ -1,0 +1,31 @@
+package com.ohgiraffers.section01.generic;
+
+public class Application {
+    public static void main(String[] args) {
+
+        /* 수업목표. 제네릭(generic)에 대해 이해할 수 있다. */
+        // Object로 구성된 클래스
+        MyGenericTest mgt = new MyGenericTest();    // 구현의 편의성은 좋음
+        mgt.setValue("Hello Wrold!");
+        mgt.setValue(1);
+        mgt.setValue(3.14);
+        mgt.setValue(new java.util.Date());
+
+        String test = (String)mgt.getValue(); // 타입 안정성이 좋지 않음 (Object를 반환해서 어떤걸로든 다운캐스팅이 가능해서)
+        boolean isTrue = (boolean)mgt.getValue(); // -> 런타임 에러 발생 가능성 올라감
+
+        GenericTest gt = new GenericTest();         // 자동으로 <Object>가 들어감
+//        GenericTest<Double> gt1 = new GenericTest<Double>();    // 기본자료형X, 래퍼클래스
+        GenericTest<Double> gt1 = new GenericTest<>();    // 생성자 쪽은 다이아몬드 연산자만 주로 작성
+        GenericTest<String> gt2 = new GenericTest<String>();
+//        int test = gt1.getValue()     // 타입 안정성이 좋음
+
+        /* 설명.
+         *  1. 제네릭 클래스는 다양한 자료형으로 변할 수 있는 클래스 하나만으로 활용가치가 높아진다.(구현의 편의성)
+         *  2. 매개변수나 반환형도 제네릭 타입으로 지정되어 명확히 해당 타입에 대해 처리할 수 있다. (타입의 안정성)
+        * */
+
+
+
+    }
+}
