@@ -8,7 +8,9 @@ public class MemberDTO implements Serializable {
 //    private static final long serialVersionUID = 1L;    // 없으면 자동 생성
                                                         // 동일 버전이면 필드가 달라져도 같은 객체로 인식
     private String id;
-    private String pwd;
+
+    /* 설명. transient 키워드가 달린 필드는 객체 입출력의 직렬화에서 제외됨 */
+    private transient String pwd;   // 보안을 위한 키워드
     private String name;
     private String email;
     private int age;
