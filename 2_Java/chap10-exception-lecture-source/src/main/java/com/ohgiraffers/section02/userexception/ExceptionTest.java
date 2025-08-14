@@ -1,11 +1,12 @@
-package com.ohgiraffers.section2.userexception;
+package com.ohgiraffers.section02.userexception;
 
-import com.ohgiraffers.section2.userexception.exception.MoneyNegativeException;
-import com.ohgiraffers.section2.userexception.exception.NotEnoughMoneyException;
-import com.ohgiraffers.section2.userexception.exception.PriceNegativeException;
+import com.ohgiraffers.section02.userexception.exception.MoneyNegativeException;
+import com.ohgiraffers.section02.userexception.exception.NotEnoughMoneyException;
+import com.ohgiraffers.section02.userexception.exception.PriceNegativeException;
 
 public class ExceptionTest {
     public void checkEnoughMoney(int price, int money) throws PriceNegativeException, MoneyNegativeException, NotEnoughMoneyException {
+//          throws Exception{   // Exception으로 throws가 가능(다형성에 의해)
         if(price < 0) {
             throw new PriceNegativeException("상품 각겨은 음수일 수 없습니다.");
         }

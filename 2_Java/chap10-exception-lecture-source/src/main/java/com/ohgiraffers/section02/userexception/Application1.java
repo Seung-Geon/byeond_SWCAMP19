@@ -1,8 +1,8 @@
-package com.ohgiraffers.section2.userexception;
+package com.ohgiraffers.section02.userexception;
 
-import com.ohgiraffers.section2.userexception.exception.MoneyNegativeException;
-import com.ohgiraffers.section2.userexception.exception.NotEnoughMoneyException;
-import com.ohgiraffers.section2.userexception.exception.PriceNegativeException;
+import com.ohgiraffers.section02.userexception.exception.MoneyNegativeException;
+import com.ohgiraffers.section02.userexception.exception.NotEnoughMoneyException;
+import com.ohgiraffers.section02.userexception.exception.PriceNegativeException;
 
 public class Application1 {
     public static void main(String[] args) {
@@ -26,11 +26,16 @@ public class Application1 {
         }
         catch (PriceNegativeException e) {
             System.out.println("가격이 음수라니!");
-        } catch (MoneyNegativeException e) {
+        }
+        /* 설명. multi-catch block */
+        catch (MoneyNegativeException | NotEnoughMoneyException e) {
             System.out.println("너 빚쟁이야?");
-        } catch (NotEnoughMoneyException e) {
-            System.out.println("돈이 부족한걸?")  ;
-        } catch(Exception e) {
+            System.out.println("돈이 부족한걸?");
+        }
+//        catch (NotEnoughMoneyException e) {
+//            System.out.println("돈이 부족한걸?")  ;
+//        }
+        catch(Exception e) {
             e.printStackTrace();
         } // 다형성에 입각해서 모든 에러를 받을 수 있음 -> 이보다 밑에 있는 자식 클래스 catch문은 의미 없어짐 -> 에러 => 부모 타입의 클래스는 아래로 빼야 됨
 
