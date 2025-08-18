@@ -21,5 +21,6 @@ public class ExceptionTest {
 
         /* 설명. 결제하는 과정이 있었다는 생각으로 메시지 작성 */
         System.out.println("가진 돈이 충분하시군요 고객님! 즐거운 쇼핑 되세요!");
+
     }
 }

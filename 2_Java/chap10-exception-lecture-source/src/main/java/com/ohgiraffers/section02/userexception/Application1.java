@@ -40,5 +40,6 @@ public class Application1 {
         } // 다형성에 입각해서 모든 에러를 받을 수 있음 -> 이보다 밑에 있는 자식 클래스 catch문은 의미 없어짐 -> 에러 => 부모 타입의 클래스는 아래로 빼야 됨
 
         System.out.println("프로그램을 종료합니다.");
+        System.out.printf("%d", 1);
     }
 }
