@@ -3,7 +3,9 @@ package com.ohgiraffers.section03.map.run;
 import com.ohgiraffers.section01.list.dto.BookDTO;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 public class Application1 {
     public static void main(String[] args) {
@@ -33,6 +35,32 @@ public class Application1 {
         hMap.put(41, 123.0);
         System.out.println("Value가 중복되는 경우: " + hMap);
 
+        /* 설명. Map을 활용해 보자 */
+        Map<String, String> hMap2 = new HashMap<>();
+        hMap2.put("one", "java 17");
+        hMap2.put("two", "mariaDB 10");
+        hMap2.put("three", "servlet/jsp");
+        hMap2.put("four", "spring 3.0");
+        hMap2.put("five", "vue");
+
+        System.out.println("hMap2 = " + hMap2); // map은 순회를 못하므로 Set으로 넘겨서 순회
+
+        /* 설명. Map에 담긴 값을 순회해서 확인하는 방법 */
+        /* 설명. 1. keySet()을 활용해 Key를 Set으로 바꾸고 iterator를 돌리는 방법 */
+        Set<String> keys = hMap2.keySet();
+        Iterator<String> iter = keys.iterator();
+        while(iter.hasNext()) {
+            String key = iter.next();
+            System.out.println("key: " + key + " value: " + hMap2.get(key));
+        }
+
+        /* 설명. 2. entrySet()을 활용하는 방법(key와 value를 묶는 Entry 타입을 통해 key 없이 value 추출 가능) */
+        Set<Map.Entry<String,String>> entrySet = hMap2.entrySet(); // Entry는 Map의 내부 인터페이스로 다루어짐
+        Iterator<Map.Entry<String,String>> iter2 = entrySet.iterator();
+        while(iter2.hasNext()) {
+            Map.Entry<String, String> entry = iter2.next();
+            System.out.println("key: " + entry.getKey() + " value: " + entry.getValue());
+        }
 
     }
 }
