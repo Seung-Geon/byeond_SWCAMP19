@@ -67,14 +67,17 @@ public class MemberRepository {
         }
     }
     public ArrayList<Member> findAllMembers() {
-        return memberList;
+        ArrayList<Member> returnList = new ArrayList<>();
+        for(Member member: memberList) {
+            if(member.getAccountStatus() == AccountStatus.ACTIVE) returnList.add(member);
+        }
+
+        return returnList;
     }
 
     public Member findMemberBy(int memNo) {
         for(Member member: memberList) {
-            if(member.getMemNo() == memNo) {
-                return member;
-            }
+            if(member.getMemNo() == memNo && member.getAccountStatus() == AccountStatus.ACTIVE) return member;
         }
         return null;
     }
@@ -121,5 +124,20 @@ public class MemberRepository {
         }
 
         return 0;
+    }
+
+    public int removeMember(int memNo) {
+        int result = 0;
+
+        for(Member member: memberList) {
+            if(member.getMemNo() == memNo) {
+                member.setAccountStatus(AccountStatus.DEACTIVE);
+                saveMembers(memberList);
+                result = 1;
+                break;
+            }
+        }
+
+        return result;
     }
 }

@@ -46,11 +46,11 @@ public class Application {
 
                     /* 설명. 수정을 위해 입력된 내용을 바탕으로 회원 수정 */
                     ms.modifyMember(reform(selectMember));  // 수정 된 내용을 담은 기존 회원 사본 객체 넘기기
-
-
                     break;
                 case 5:
 
+                    /* 설명. soft delete 할 예정 */
+                    ms.removeMember(chooseMemNo());
                     break;
                 case 9:
                     System.out.println("프로그램을 종료합니다.");
@@ -151,7 +151,7 @@ public class Application {
 
     private static String[] resetHobbies() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("몇 개의 취미를 입력하시겠습니까?");
+        System.out.print("몇 개의 취미를 입력하시겠습니까?");
         String[] hobbies = new String[sc.nextInt()];
         sc.nextLine();      // 버퍼 제거
         for(int i = 0; i < hobbies.length; i++) {
