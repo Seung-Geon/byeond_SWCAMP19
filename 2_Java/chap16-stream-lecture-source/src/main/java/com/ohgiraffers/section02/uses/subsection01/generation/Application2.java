@@ -1,4 +1,4 @@
-package com.ohgiraffers.section01.section02.uses.subsection01.generation;
+package com.ohgiraffers.section02.uses.subsection01.generation;
 
 /* 설명.
  *  기본 타입 스트림(Primitive Stream) 생성

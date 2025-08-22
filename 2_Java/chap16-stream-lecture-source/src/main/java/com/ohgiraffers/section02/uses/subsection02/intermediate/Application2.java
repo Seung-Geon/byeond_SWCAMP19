@@ -1,4 +1,4 @@
-package com.ohgiraffers.section01.section02.uses.subsection02.intermediate;
+package com.ohgiraffers.section02.uses.subsection02.intermediate;
 
 import java.util.Arrays;
 import java.util.List;
@@ -58,7 +58,7 @@ public class Application2 {
         Stream<String> sStream = Arrays.stream(strs);
 
         sStream.map(String::toUpperCase);
-        System.out.println();x
+        System.out.println();
         sStream.filter(str -> str.length() >= 4)
                 .forEach(result -> System.out.print(result + " "));
 

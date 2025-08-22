@@ -1,4 +1,4 @@
-package com.ohgiraffers.section01.section02.uses.subsection01.generation;
+package com.ohgiraffers.section02.uses.subsection01.generation;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
