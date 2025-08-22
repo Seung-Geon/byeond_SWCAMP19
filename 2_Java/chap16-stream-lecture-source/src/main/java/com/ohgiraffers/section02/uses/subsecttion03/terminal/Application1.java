@@ -37,7 +37,7 @@ public class Application1 {
         OptionalDouble avg = IntStream.range(1, 10).average();
         System.out.println("avg = " + avg.orElse(0.0));  // 존재하면 숫자로만 나오기도 함
 
-        /* 설명. 홀수/짝수 분ㄴ석 */
+        /* 설명. 홀수/짝수 분석 */
         /* 설명. 1. 홀수 분석 */
         long oddCount = IntStream.rangeClosed(1, 100)
                 .filter(n -> n % 2 == 0)
