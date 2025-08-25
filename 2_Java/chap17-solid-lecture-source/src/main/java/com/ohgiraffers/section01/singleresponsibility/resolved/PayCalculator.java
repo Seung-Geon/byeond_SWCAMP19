@@ -1,4 +1,4 @@
-package com.ohgiraffers.section1.singleresponsibility.resolved;
+package com.ohgiraffers.section01.singleresponsibility.resolved;
 
 public class PayCalculator {
     public void applyPayRate(Employee emp) {

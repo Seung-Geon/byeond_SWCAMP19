@@ -1,4 +1,4 @@
-package com.ohgiraffers.section1.singleresponsibility.problem;
+package com.ohgiraffers.section01.singleresponsibility.problem;
 
 public class BadEmployee {
     private String name;
