@@ -83,7 +83,32 @@ public class JupiterAssertionsTest {
 
 
     /* 설명. 6. assertThrows */
-    
+    @Test
+    @DisplayName("void 메소드를 테스트하는 경우 어떤 exception이 발생하는지 테스트")
+    void testAssertThrows() {
+        /*
+            void 타입 확인
+            1. 예외를 통한 확인
+            2. 반환형이 있는 임의의 동일 메소드를 만들고 해당 메소드로 확인
+        */
+
+        int firstNum = 10;
+        int secondNum = 0;
+        String expectedMessage = "0으로 나눌 수 없습니다!";
+
+        NumberValidator validator = new NumberValidator();
+        Exception exception = Assertions.assertThrows(
+                Exception.class,
+                () -> validator.checkDividableNumbers(firstNum, secondNum)      // 예외 발생시 해당 객체 잡아내는 부분
+        );
+
+        Assertions.assertAll(
+                () -> Assertions.assertInstanceOf(IllegalArgumentException.class, exception,    // 잡아낸 예외 객체의 클래스 확인
+                        () -> "예외 타입이 일치하지 않음"),                                         // 일치하지 않으면 동작
+                () -> Assertions.assertEquals(expectedMessage, exception.getMessage(),          // 메시지 비교
+                        () -> "예외 메시지가 일치하지 않음")                                        // 일치하지 않으면 동작
+        );
+    }
 
 }
 
