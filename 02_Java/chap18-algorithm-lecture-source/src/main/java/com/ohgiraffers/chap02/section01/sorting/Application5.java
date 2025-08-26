@@ -22,7 +22,7 @@ public class Application5 {
         int index2 = median + 1;
 
         while(index1 <= median && index2 <= high) {
-            if(temp[index1] > temp[index2]) {   // 오름차순을 위한 조건
+            if(temp[index1] > temp[index2]) {   // 내림차순을 위한 조건
                 arr[k] = temp[index1];
                 k++;
                 index1++;
