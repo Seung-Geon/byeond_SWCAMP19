@@ -3,12 +3,10 @@ package com.ohgiraffers.parameterzized.section01.params;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.EnumSource;
-import org.junit.jupiter.params.provider.NullSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
 
 import java.time.Month;
+import java.util.stream.Stream;
 
 public class ParameterizedTests {
 
@@ -63,5 +61,58 @@ public class ParameterizedTests {
         int actual = DateValidator.getlastDayOf(month);
 
         Assertions.assertEquals(varifyValue, actual);
+    }
+
+    /* 설명. 4. @CsvSource를 이용한 CSV 리터럴 */
+    @DisplayName("영문자를 대문자로 변경하는지 확인")
+    @ParameterizedTest
+//    @CsvSource({"test, TEST", "tEst, TEST", "JavaScript, JAVASCRIPT"})
+    @CsvSource(
+            value = {"test: TEST", "tEst: TEST", "JavaScript: JAVASCRIPT"},
+            delimiter = ':'
+    )   // 구분자를 ','이 아닌 다른 것을 원하는 경우 어떤 속성에 값을 넣는지 명확히 표기해주고, 구분자도 적어줘야 함
+    void testToUpperCase(String input, String verifyValue) {
+        System.out.println("input = " + input);
+        System.out.println("verifyValue = " + verifyValue);
+
+        String actual = input.toUpperCase();
+
+        Assertions.assertEquals(verifyValue, actual);
+    }
+
+    @DisplayName("CSV 파일을 읽은 테스트 데이터를 테스트에 활용되는지 확인")
+    @ParameterizedTest
+    @CsvFileSource(resources = "/parameter-test-data.csv", numLinesToSkip = 1)
+    void testToUpperCaseWithCSVFileData(String input, String verifyValue) {
+        String actual = input.toUpperCase();
+        Assertions.assertEquals(verifyValue, actual);
+    }
+
+    /* 설명. 5. @MethodSource를 활용한 테스트 인수 활용하기 */
+    /* 설명. 메소드가 반환한 스트림을 활용해 여러 테스트 케이스를 테스트 해 볼 수 있음 */
+    private static Stream<Arguments> providerStringSource() {
+        return Stream.of(
+                Arguments.of("hello world", "HELLO WORLD"),
+                Arguments.of("JavaScript", "JAVASCRIPT"),
+                Arguments.of("tEst", "TEST")
+//                Arguments.of("tEst", "TEST", ...) // 원하는 만큼 인수를 넣을 수 있음
+        );
+    }
+
+    @DisplayName("메소드 소스를 활용한 대문자 변환 테스트")
+    @ParameterizedTest
+    @MethodSource("providerStringSource")
+    void testToUpperCaseWithMethodSource(String input, String verifyValue) {
+        String actual = input.toUpperCase();
+        Assertions.assertEquals(verifyValue, actual);
+    }
+
+    /* 설명. 6. ArgumentsProvider를 이용한 메소드 소스 활용 */
+    @DisplayName("두 수를 더한 결과를 정상적으로 반환하는지 테스트")
+    @ParameterizedTest(name = "[{index}] {0} + {1} = {2} (이)가 맞는지 확인")  // 결과창에서 각 테스트 케이스의 문구
+    @ArgumentsSource(SumTwoNumbersArgumentsProvider.class)
+    void testSumTwoNumbers(int num1, int num2, int verifyValue) {
+        int actual = Calculator.sumTwoNumbers(num1, num2);
+        Assertions.assertEquals(verifyValue, actual);
     }
 }
