@@ -2,8 +2,9 @@ package com.ohgiraffers.chap02.section01.sorting;
 
 /* 설명.
  *  삽입 정렬(Insertion Sort)
- *
- *
+ *   이미 정렬된 데이터 범위에 정렬되지 ㅇ낳은 데이터를 적절한 위치에 삽입시켜 정렬하는 방식이다.
+ *   시간복잠도는 O(n^2)이라 효율적이지 않음
+ *   해당 위치에 있는 값을 앞의 어떤위치에 들어갈지 살펴보며 밀어주다 적절한 위치에 넣게 된다.
 * */
 public class Application3 {
     /* 설명.
