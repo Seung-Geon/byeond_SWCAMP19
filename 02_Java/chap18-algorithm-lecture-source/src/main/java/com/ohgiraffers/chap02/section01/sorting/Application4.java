@@ -8,10 +8,12 @@ import java.util.stream.IntStream;
 
 /* 설명.
  *  퀵 정렬 (Quick Sort)
+ *   기준값(pivot)을 선정해 해당 값보다 작은 데이터와 큰 데이터로 분류하는 것을 반복하며 정렬하는 것으로 병합 정렬 알고리즘과 함께 실제 정렬 알고리즘으로 많이 활용되고 있다.
+ *   시간 복잡도(O(nlogn))에 해당한다.
 * */
 public class Application4 {
-
-
+    
+    /* 설명. solution 메소드와 매개변수가 바뀌어서 main 다시 한번 작성해봄 */
     public static void main(String[] args) {
         int[] arr;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
