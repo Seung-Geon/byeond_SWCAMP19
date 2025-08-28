@@ -13,19 +13,30 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-public class Application3Test {
-    private static Integer input1, input2;
-    private static Integer output1,output2;
+public class Application4Test {
+    private static String input1;
+    private static String input2;
+    private static Integer output1;
+    private static Integer output2;
     @BeforeAll
     public static void set() {
 
         /* 예시1 */
-        input1 = 6;
-        output1 = 3;
+        input1 = "5\n" +
+                "7\n" +
+                "3 8\n" +
+                "8 1 0\n" +
+                "2 7 4 4\n" +
+                "4 5 2 6 5";
+        output1 = 30;
 
         /* 예시2 */
-        input2 = 12;
-        output2 = 16;
+        input2 = "4\n" +
+                "7\n" +
+                "3 8\n" +
+                "8 1 0\n" +
+                "2 7 4 4";
+        output2 = 25;
     }
 
     public static Stream<Arguments> provideSource() {
@@ -34,12 +45,12 @@ public class Application3Test {
                 arguments(input2, output2)
         );
     }
-    @DisplayName("dp3")
+    @DisplayName("dp4")
     @Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
     @ParameterizedTest
     @MethodSource("provideSource")
-    public void dp3test(Integer input, Integer output) throws Exception {
-        Integer result = Application3.solution(input);
+    public void dp4test(String input, Integer output) throws Exception {
+        Integer result = Application4.solution(input);
         Assertions.assertEquals(output, result);
     }
 }
