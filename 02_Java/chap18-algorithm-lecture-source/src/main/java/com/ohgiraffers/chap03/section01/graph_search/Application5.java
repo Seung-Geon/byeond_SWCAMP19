@@ -16,7 +16,7 @@ public class Application5 {
 
         solveNQueen(0);
 
-        System.out.println("count = " + count);
+//        System.out.println("count = " + count);
 
         return count;
     }
