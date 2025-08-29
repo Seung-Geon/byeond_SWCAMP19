@@ -38,13 +38,13 @@ public class JDBCTemplate {
         return con;
     }
 
-    public static void close(AutoCloseable con) {
-        try {
-            if(con != null) con.close();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public static void close(AutoCloseable con) {
+//        try {
+//            if(con != null) con.close();
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     public static void close(Statement stmt) {
         try {
