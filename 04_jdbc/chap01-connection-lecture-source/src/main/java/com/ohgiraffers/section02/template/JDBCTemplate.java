@@ -1,4 +1,4 @@
-package com.ohgiraffers.section01.connection;
+package com.ohgiraffers.section02.template;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -8,8 +8,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class Application2 {
-    public static void main(String[] args) {
+public class JDBCTemplate {
+    public static Connection getConnection() {
         Connection con = null;
         Properties prop = new Properties();
 
@@ -24,7 +24,7 @@ public class Application2 {
 
             Class.forName(driver);  // 동적 메모리 할당
             con = DriverManager.getConnection(url, user, password);
-            System.out.println("Connection 객체: " + con);
+//            System.out.println("Connection 객체: " + con);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } catch (SQLException e) {
@@ -33,12 +33,18 @@ public class Application2 {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } finally {
-            try {
-                if(con != null) con.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+        }
+
+        /* 설명. Connection 객체를 닫으면 안됨 */
+
+        return con;
+    }
+
+    public static void close(Connection con) {
+        try {
+            if(con != null) con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
