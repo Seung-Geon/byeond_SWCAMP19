@@ -1,4 +1,4 @@
-package com.ohgiraffers.request;
+package com.ohgiraffers.response;
 
 import java.io.*;
 

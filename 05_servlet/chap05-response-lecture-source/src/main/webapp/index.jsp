@@ -5,8 +5,9 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-    <h1>Request header</h1>
-    <a href = "header">요청 헤더 값 출력해 보기(request header)</a>
-
+<h1><%= "Hello World!" %>
+</h1>
+<br/>
+<a href="hello-servlet">Hello Servlet</a>
 </body>
 </html>
