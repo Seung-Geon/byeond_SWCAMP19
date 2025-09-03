@@ -27,9 +27,5 @@ public class ReceiveInformationServlet extends HttpServlet {
 
         RequestDispatcher rd = req.getRequestDispatcher("print");
         rd.forward(req, resp);  // 나의 상태값을 다른 서블릿에게 온전하게 넘김
-
-
-
-
     }
 }
