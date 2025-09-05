@@ -19,6 +19,15 @@ dependencies {
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     implementation 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    // 아래부터는 DI를 위한 추가 라이브러리
+    // 1. @Resource
+    // https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api
+    implementation ('jakarta.annotation:jakarta.annotation-api:2.1.1')
+
+    // 2. @inject
+    // https://mvnrepository.com/artifact/jakarta.inject/jakarta.inject-api
+    implementation ('jakarta.inject:jakarta.inject-api:2.0.1')
 }
 
 test {
