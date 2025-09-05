@@ -15,7 +15,7 @@ public class BookService {
     * */
     @Autowired                  // 자동으로 주입 받음
 //    private BookDAO bookDAO = new BookDAOImpl();
-    private BookDAO bookDAO;
+    private BookDAO bookDAO;    // 리플렉션 기술을 사용해서 대입해줌
 
     public List<BookDTO> findAllBook() {
         return bookDAO.findAllBook();

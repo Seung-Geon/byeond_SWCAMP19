@@ -1,4 +1,4 @@
-package com.ohgiraffers.section01.autowired.subsection02.setter;
+package com.ohgiraffers.section01.autowired.subsection03.constructor;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -10,9 +10,9 @@ public class Application {
         ApplicationContext context
                 = new AnnotationConfigApplicationContext("com.ohgiraffers.section01");
 
-//        Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
+        Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
 
-        BookService bookService = (BookService) context.getBean("setterService", BookService.class);    // 동일 타입이 여러개 있으면 이렇게 사용
+        BookService bookService = (BookService) context.getBean("constructorService", BookService.class);    // 동일 타입이 여러개 있으면 이렇게 사용
 //        System.out.println("bookService = " + bookService);
 
 //        bookService.findAllBook().forEach(System.out::println);

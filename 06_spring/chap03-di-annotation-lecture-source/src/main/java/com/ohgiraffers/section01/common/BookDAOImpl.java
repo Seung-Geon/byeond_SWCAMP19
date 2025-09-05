@@ -10,7 +10,8 @@ import java.util.Map;
 @Repository
 public class BookDAOImpl implements BookDAO {
 
-    private Map<Integer, BookDTO> books;
+    /* 설명. ResultSet 대신에 자바에서는 Map 같은 Collection 형태로 담게 됨(feat.ResultSet모다 좋음(result은 소모성) */
+    private Map<Integer, BookDTO> books; // DB에서 load해서 캐싱 한 것
 
     /* 설명. JDBC를 활용한 다중행 조회 결과인 ResultSet을 자바의 타입으로 받았다고 가정 */
     public BookDAOImpl() {

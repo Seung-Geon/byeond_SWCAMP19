@@ -10,8 +10,15 @@ import java.util.List;
 @Service("setterService")
 public class BookService {
 
-    @Autowired                  // 자동으로 주입 받음
     private BookDAO bookDAO;
+
+    /* 설명. Setter 추가 */
+    // 필드 주입 대신에
+    @Autowired
+    public void setBookDAO(BookDAO bookDAO) {
+        System.out.println("setter 활용");
+        this.bookDAO = bookDAO;
+    }
 
     public List<BookDTO> findAllBook() {
         return bookDAO.findAllBook();
