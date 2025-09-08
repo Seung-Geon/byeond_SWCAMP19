@@ -6,7 +6,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
 @ComponentScan(basePackages = "com.ohgiraffers.section01.aop")
-@EnableAspectJAutoProxy(proxyTargetClass = true)
+@EnableAspectJAutoProxy(proxyTargetClass = true)    // 이걸 해줘야 Aspect가 적용된다.
 public class ContextConfiguration {
 
 
