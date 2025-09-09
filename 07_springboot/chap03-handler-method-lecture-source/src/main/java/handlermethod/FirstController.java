@@ -1,6 +1,7 @@
 package handlermethod;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -94,4 +95,27 @@ public class FirstController {
         return "first/searchResult";
     }
 
+    @GetMapping("/login")
+    public void login() {}
+
+    @PostMapping("/login")
+    public String sessionTest1(String id,
+                               String pwd,
+                               HttpSession session) {   // session을 달라고 하면 알아서 request.getSession()을 넣어줌
+        System.out.println("id = " + id);
+        System.out.println("pwd = " + pwd);
+
+        session.setAttribute("id", id);
+        session.setAttribute("pwd", pwd);
+        session.setAttribute("name", "홍길동");
+
+        return "first/loginResult";
+    }
+
+    @GetMapping("/logout1")
+    public String logoutTest1(HttpSession session) {
+        session.invalidate();
+
+        return "first/loginResult";
+    }
 }
