@@ -15,8 +15,8 @@ public class ContextConfiguration {
 
         /* 설명. 예외 타입과 예외를 처리 할 페이지 설정(properties로 만들어야 함) */
         Properties props = new Properties();
-        props.setProperty("java.lang.nullPointerException", "error/nullPointer");
-        props.setProperty("MemberRegistException", "error/memberregist");
+        props.setProperty("java.lang.NullPointerException", "error/nullPointer");   // 전역 에러 처리
+        props.setProperty("MemberRegistException", "error/memberRegist");
 
         /* 설명. 전체 예외 관련되어 설정하기 */
         /* 설명. 1. 예외에 따른 페이지 설정한 것 활용 */

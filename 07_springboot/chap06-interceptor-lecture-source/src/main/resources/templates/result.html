@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- css 연결 | WAS가 아닌 Web 서버에서 처리할 정적 리소스임을 표현하기 위해 WebConfiguration 설정 -->
+    <link rel = "stylesheet" href = "http://localhost:8080/css/test.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1 th:text = "|메소드 호출 수행 시간: ${interval}(ms)|"></h1>
+</body>
+</html>
