@@ -10,17 +10,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class FileUploadController {
-    
+
     /* 설명. application.yml에서 파일업로드 공통 경로를 불러와 변수에 대입 */
     @Value("${filepath}")
     private String filepath;
-    
+
     @PostMapping("single-file")
     public String singleFile(@RequestParam MultipartFile singleFile,
                              @RequestParam String singleFileDescription,
@@ -68,5 +66,60 @@ public class FileUploadController {
     }
 
     @GetMapping("result")
-    public void result() {}
+    public void result() {
+    }
+
+    @PostMapping("multi-file")
+    public String multiFileUpload(@RequestParam List<MultipartFile> multiFiles,
+                                  @RequestParam String multiFileDescription,
+                                  RedirectAttributes rttr) {
+
+        /* 설명. DB에 보낼 값을 담기 위한 컬렉션 */
+        List<Map<String, String>> files = new ArrayList<>();
+
+        /* 설명. 화면에서 각 파일마다 img 태크의 src 속성으로 작용하기 위한 문자열을 담은 컬렉션 */
+        List<String> imgSrcs = new ArrayList<>( );
+
+
+        try {
+            for (int i = 0; i < multiFiles.size(); i++) {
+
+                /* 설명. 각 파일마다 리네임 */
+                String originFileName = multiFiles.get(i).getOriginalFilename();
+                String ext = originFileName.substring(originFileName.lastIndexOf("."));
+                String saveName = UUID.randomUUID().toString().replace("-", "") + ext;
+
+                /* 설명. 각 파일을 저장 경로에 저장 */
+                multiFiles.get(i).transferTo(new File(filepath, "/img/multi/" + saveName));
+
+                /* 설명. DB에 보낼 값 설정(각 파일마다 Map<String, String>에 저장 */
+                Map<String, String> file = new HashMap<>();
+                file.put("originFileName", originFileName);
+                file.put("saveName", saveName);
+                file.put("filePath", "/img/multi/" + saveName);
+                file.put("multiFileDescription", multiFileDescription);
+
+
+                files.add(file);
+                imgSrcs.add("/img/multi/" + saveName);
+            }
+
+            /* 설명. DB에 multi 파일 업로드만큼의 insert 성공 후 */
+            rttr.addFlashAttribute("message", "다중 파일 업로드 성공");
+            rttr.addFlashAttribute("imgs", imgSrcs);
+            rttr.addFlashAttribute("multiFileDescription", multiFileDescription);
+
+        } catch (IOException e) {
+            /* 설명. 부분적인 파일 저장 실패와 관련되어 후처리 */
+
+            for (int i = 0; i < files.size(); i++) {    //업로드에 성공한 것들은 List에 쌓였다는 생각으로 작성
+                Map<String, String> file = files.get(i);
+                new File(filepath + "/img/multi/" + file.get("saveName")).delete();
+            }
+
+            rttr.addFlashAttribute("message", "다중 파일 업로드 실패!");
+        }
+
+        return "redirect:/result";
+    }
 }
