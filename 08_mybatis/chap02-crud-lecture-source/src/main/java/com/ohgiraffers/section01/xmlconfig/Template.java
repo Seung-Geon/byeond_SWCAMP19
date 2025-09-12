@@ -28,5 +28,4 @@ public class Template {
 
         return sqlSessionFactory.openSession(false);    // 싱글통하게 생성된 Factory에서 ConnectionPool에 있는 SqlSession 반환
     }
-
 }
