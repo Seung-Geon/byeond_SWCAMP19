@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.ohgiraffers.dynamic.MenuMapper">
+    <resultMap id = "menuResultMap" type = "com.ohgiraffers.dynamic.MenuDTO">
+        <!-- resultMap의 column 속성은 ResultSet의 컬럼명을 써야 한다.(컬럼명 또는 별칭)-->
+        <!-- 매핑은 필요한 것만 매핑해도 문제없이 객체에 담겨 반환된다.-->
+        <id property = "menuCode" column = "MENU_CODE"/> <!-- PK만 id로 지정 result로 해도 상관이 없지만, id로 하는게 검색 속도가 빠르다고 함 -->
+        <result property = "menuName" column = "MENU_NAME"/>
+        <result property = "menuPrice" column = "MENU_PRICE"/>
+        <result property = "categoryCode" column = "CATEGORY_CODE"/>
+        <result property = "orderableStatus" column = "ORDERABLE_STATUS"/>
+    </resultMap>
+
+    <select id = "selectMenuByPrice" parameterType = "_int" resultMap = "menuResultMap">
+        SELECT
+               A.MENU_CODE
+             , A.MENU_NAME
+             , A.MENU_PRICE
+             , A.CATEGORY_CODE
+             , A.ORDERABLE_STATUS
+          FROM TBL_MENU AS A
+         WHERE A.ORDERABLE_STATUS = 'Y'
+        <if test = "maxPrice gte 0 and maxPrice lte 10000">
+           <![CDATA[
+           AND A.MENU_PRICE < #{maxPrice}
+           ]]>  <!-- xml파일에서는 <를 태그의 시작으로 보기 떄문에 <![CDATA[]]> 를 활용해 해당 부분에서 <를 문자열로 인식하게 변경해줘야 한다. -->
+        </if>
+        <if test = "maxPrice gt 10000 and maxPrice lte 20000">
+           AND A.MENU_PRICE BETWEEN 10000 AND #{maxPrice}
+        </if>
+        <if test = "maxPrice gt 20000 and maxPrice lte 30000">
+           AND A.MENU_PRICE BETWEEN 20000 AND #{maxPrice}
+        </if>
+        <if test = "maxPrice gt 30000">
+           AND A.MENU_PRICE BETWEEN 30000 AND #{maxPrice}
+        </if>
+    </select>
+
+    <select id ="searchMenu" parameterType = "com.ohgiraffers.dynamic.SearchCriteria" resultMap = "menuResultMap">
+        SELECT
+               A.MENU_CODE
+             , A.MENU_NAME
+             , A.MENU_PRICE
+             , A.CATEGORY_CODE
+             , A.ORDERABLE_STATUS
+          FROM TBL_MENU AS A
+        <if test="condition == 'category'">
+          JOIN TBL_CATEGORY B ON (A.CATEGORY_CODE = B.CATEGORY_CODE)
+        </if>
+         WHERE A.ORDERABLE_STATUS = 'Y'
+        <if test = "condition == 'name'">
+           AND A.MENU_NAME LIKE CONCAT ('%', #{value}, '%')
+        </if>
+        <if test="condition == 'category'">
+           AND B.CATEGORY_NAME LIKE CONCAT('%', #{value}, '%')
+        </if>
+
+    </select>
+
+</mapper>

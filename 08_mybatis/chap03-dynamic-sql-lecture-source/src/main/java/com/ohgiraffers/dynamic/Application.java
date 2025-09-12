@@ -1,5 +1,6 @@
 package com.ohgiraffers.dynamic;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class Application {
@@ -35,12 +36,16 @@ public class Application {
         do {
             System.out.println("==== if 서브 메뉴 ====");
             System.out.println("1. 원하는 금액대에 적합한 추천 메뉴 목록 보여주기");
+            System.out.println("2. 메뉴 이름 혹은 카테고리명으로 검색하여 메뉴 목록 보여주기");
             System.out.println("9. 이전 메뉴로");
             System.out.print("메뉴 번호를 입력해 주세요: ");
             int input = sc.nextInt();
             switch(input) {
                 case 1:
                     ms.findMenuByPrice(inputPrice());
+                    break;
+                case 2:
+                    ms.searchMenu(intputSearchCriteria());
                     break;
                 case 9:
                     return;
@@ -54,5 +59,16 @@ public class Application {
         Scanner sc = new Scanner(System.in);
         System.out.print("검색 할 가격대의 최대 금액을 입력해 주세요: "); // 0, 1만, 2만, 3만 구간에서 입력한 가격까지
         return sc.nextInt();
+    }
+
+    private static SearchCriteria intputSearchCriteria() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("검색 기준을 입력해 주세요(name or category): ");
+        String condition =sc.nextLine();
+        System.out.print("검색어를 입력해 주세요: ");
+        String value = sc.nextLine();
+
+        return new  SearchCriteria(condition, value);
+
     }
 }

@@ -16,7 +16,9 @@
         </environment>
     </environments>
 
-<!--    <mappers>-->
-<!--        <mapper resource = ""/>-->
-<!--    </mappers>-->
+    <mappers>
+<!--        <mapper resource = "com/ohgiraffers/dynamic/MenuMapper.xml"/>-->
+<!--        설명. mapper들이 존재하는 패키지로 한번에 등록 가능(rimix 방식만 해당, xml 방식의 설정에 쿼리는 자바클래스로 하면 가능)-->
+        <package name = "com.ohgiraffers.dynamic"/> <!-- 패키지의 xml은 자동 등록 -> mapper가 추가될 때마다 추가작성할 필요 X -->
+    </mappers>
 </configuration>
