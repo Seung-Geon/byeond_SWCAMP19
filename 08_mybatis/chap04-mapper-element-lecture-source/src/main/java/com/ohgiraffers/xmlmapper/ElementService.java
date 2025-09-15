@@ -35,7 +35,14 @@ public class ElementService {
         categories.forEach(System.out::println);
 
         System.out.println("'식사' 카테고리의 메뉴들: ");
-        System.out.println(categories.get(3).getMenus());
+        for (CategoryAndMenuDTO category: categories) {
+            if("한식".equals(category.getCategoryName()))
+                System.out.println(category.getMenus());
+        }
+
+        categories.stream()
+                .filter((category) -> "한식".equals(category.getCategoryName()))
+                .forEach(c -> System.out.println(c.getMenus()));
 
         sqlSession.close();
 
