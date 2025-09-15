@@ -138,14 +138,46 @@
              , A.CATEGORY_CODE
              , A.ORDERABLE_STATUS
           FROM TBL_MENU AS A
-        <where>
+<!--        <where>-->
+<!--            <if test="name != null">-->
+<!--                AND A.MENU_NAME LIKE CONCAT('%', #{name}, '%')-->
+<!--            </if>-->
+<!--            <if test="categoryCode != null">-->
+<!--                AND A.CATEGORY_CODE = #{categoryCode}-->
+<!--            </if>-->
+<!--        </where>-->
+        <!-- trim 태그를 통한 where 태그 대체 -->
+        <trim prefix = "WHERE" prefixOverrides = "AND | OR">
             <if test="name != null">
                 AND A.MENU_NAME LIKE CONCAT('%', #{name}, '%')
             </if>
             <if test="categoryCode != null">
                 AND A.CATEGORY_CODE = #{categoryCode}
             </if>
-        </where>
+        </trim>
     </select>
+
+    <update id = "updateMenu" parameterType = "hashmap">
+        UPDATE
+               TBL_MENU
+<!--        <set>-->
+<!--            <if test = "menuName != null and menuName != ''">-->
+<!--                MENU_NAME = #{menuName}-->
+<!--            </if>-->
+<!--            <if test = "orderableStatus != null and orderableStatus != ''">-->
+<!--                , ORDERABLE_STATUS = #{orderableStatus}-->
+<!--            </if>-->
+<!--        </set>-->
+        <trim prefix = "SET" prefixOverrides=", ">
+            <if test = "menuName != null and menuName != ''">
+                MENU_NAME = #{menuName}
+            </if>
+            <if test = "orderableStatus != null and orderableStatus != ''">
+                , ORDERABLE_STATUS = #{orderableStatus}
+            </if>
+        </trim>
+
+         WHERE MENU_CODE = #{menuCode}
+    </update>
 
 </mapper>

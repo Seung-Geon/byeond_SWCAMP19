@@ -145,7 +145,7 @@ public class Application {
 
         do {
             System.out.println("==== trim 서브 메뉴 ====");
-            System.out.println("1. 검색 조건이 있는 경우 메뉴 콯드로 조회. 단, 없으면 전체 조회");
+            System.out.println("1. 검색 조건이 있는 경우 메뉴 코드로 조회. 단, 없으면 전체 조회");
             System.out.println("2. 메뉴 혹은 카테고리로 검색. 단, 메뉴와 카테고리 둘 다 일치하는 경우도 검색하며, 검색 조건이 없는 경우 전체 조회");
             System.out.println("3. 원하는 메뉴 정보만 수정하기");
             System.out.println("9. 이전 메뉴로");
@@ -159,6 +159,9 @@ public class Application {
                 case 2:
                     ms.searchMenuByNameOrCategory(inputSearchCriteriaMap());
                     break;
+                case 3:
+                    ms.modifyMenu(inputChangeInfo());
+                    break;
                 case 9:
                     return;
             }
@@ -169,7 +172,7 @@ public class Application {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("검색 조건을 입력하시겠습니까?(예 or 아니오) ");
-        boolean hasSearchValue = "얘".equals(sc.nextLine());
+        boolean hasSearchValue = "예".equals(sc.nextLine());
 
         SearchCriteria searchCriteria = new SearchCriteria();
         if (hasSearchValue) {
@@ -212,5 +215,25 @@ public class Application {
         }
 
         return criteria;
+    }
+
+    private static Map<String, Object> inputChangeInfo() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("변경할 메뉴 코드를 입력하세요: ");
+        int menuCode = sc.nextInt();
+        System.out.print("변경할 메뉴 이름을 입력하세요: ");
+        sc.nextLine();
+        String menuName = sc.nextLine();
+        System.out.print("변경할 판매 여부를 결정해 주세요(Y/N)");
+        String orderableStatus = sc.nextLine().toUpperCase();
+
+        Map<String, Object> critMap = new HashMap<>();
+
+        critMap.put("menuCode", menuCode);
+        critMap.put("menuName", menuName);
+        critMap.put("orderableStatus", orderableStatus);
+
+        return critMap;
     }
 }
