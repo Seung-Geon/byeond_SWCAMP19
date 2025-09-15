@@ -20,12 +20,11 @@ public class Application {
                     es.selectResultMapTest();
                     break;
                 case 2:
-
+                    es.selectResultMapAssociationTest();
                     break;
                 case 3:
-
+                    es.selectResultMapCollectionTest();
                     break;
-
             }
         } while (true);
     }
