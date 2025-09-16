@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.ohgiraffers.transactional.section01.annotation.OrderMapper">
+    <insert id = "insertOrder" parameterType = "com.ohgiraffers.transactional.section01.annotation.Order">
+        INSERT
+          INTO TBL_ORDER
+        (
+          ORDER_DATE
+        , ORDER_TIME
+        , TOTAL_ORDER_PRICE
+        )
+        VALUES
+        (
+          #{orderDate}
+        , #{orderTime}
+        , #{totalOrderPrice}
+        )
+        <selectKey keyProperty="orderCode" order = "AFTER" resultType = "_int">
+            <!-- 여기서 나온 값이 Order의 orderCode로 들어감. 단일행에 대해 가능한 것!! -->
+            SELECT MAX(ORDER_CODE) FROM TBL_ORDER
+        </selectKey>
+    </insert>
+
+</mapper>
