@@ -20,6 +20,13 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect"/> <!-- SQL 문법으로 변환시 변환할 DBMS 문법 지정 -->
 
             <!-- 설명. auto ddl 설정 -->
+            <!--
+                설명.
+                 create: 애플리케이션 실행 시 기존 테이블이 있다면 drop, 그리고 항상 create table 진행
+                 create-drop: 애플리케이션 실행 시 항상 create table 진행, 종료 시 drop
+                 update: 애플리케이션 실행 시 기존 테이블이 없다면 create table, 있다면 컬럼이 추가 될 때만 alter
+            -->
+
             <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
 
