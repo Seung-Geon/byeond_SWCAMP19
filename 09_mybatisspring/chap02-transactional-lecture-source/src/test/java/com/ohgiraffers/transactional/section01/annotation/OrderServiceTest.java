@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @SpringBootTest
+@Transactional          // Test 크래스에도 @Transactional을 붙일 수 있는데 이렇게 되면 테스트 시 트랜잭션은 Rollback 됨
 class OrderServiceTest {
 
     @Autowired
