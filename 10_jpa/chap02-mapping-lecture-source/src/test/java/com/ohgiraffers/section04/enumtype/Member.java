@@ -1,15 +1,12 @@
-package com.ohgiraffers.section01.entity;
+package com.ohgiraffers.section04.enumtype;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.Objects;
 
-@Entity(name = "member_section01")
-@Table(name = "tbl_member_section01")
+@Entity(name = "member_section04")
+@Table(name = "tbl_member_section04")
 public class Member {
     @Id
     @Column(name = "member_no")
@@ -34,10 +31,13 @@ public class Member {
     private String address;
 
     @Column(name = "enroll_date")
-    private java.util.Date enrollDate;
+    private Date enrollDate;
 
+    /* 설명. Enum 타입은 숫자(ORDINAL)/이름(STRING) 두 가지 형태로 설정할 수 있따.(DB에 들어갈 값) */
     @Column(name = "member_role")
-    private String memberRole;
+//    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
+    private RoleType memberRole;
 
     @Column(name = "status")
     private String status;
@@ -45,7 +45,7 @@ public class Member {
     public Member() {
     }
 
-    public Member(int memberNo, String memberId, String memberPwd, String nickname, String phone, String email, String address, Date enrollDate, String memberRole, String status) {
+    public Member(int memberNo, String memberId, String memberPwd, String nickname, String phone, String email, String address, Date enrollDate, RoleType memberRole, String status) {
         this.memberNo = memberNo;
         this.memberId = memberId;
         this.memberPwd = memberPwd;
@@ -122,11 +122,11 @@ public class Member {
         this.enrollDate = enrollDate;
     }
 
-    public String getMemberRole() {
+    public RoleType getMemberRole() {
         return memberRole;
     }
 
-    public void setMemberRole(String memberRole) {
+    public void setMemberRole(RoleType memberRole) {
         this.memberRole = memberRole;
     }
 
@@ -136,18 +136,6 @@ public class Member {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Member member = (Member) o;
-        return memberNo == member.memberNo && Objects.equals(memberId, member.memberId) && Objects.equals(memberPwd, member.memberPwd) && Objects.equals(nickname, member.nickname) && Objects.equals(phone, member.phone) && Objects.equals(email, member.email) && Objects.equals(address, member.address) && Objects.equals(enrollDate, member.enrollDate) && Objects.equals(memberRole, member.memberRole) && Objects.equals(status, member.status);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(memberNo, memberId, memberPwd, nickname, phone, email, address, enrollDate, memberRole, status);
     }
 
     @Override
@@ -161,7 +149,7 @@ public class Member {
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", enrollDate=" + enrollDate +
-                ", memberRole='" + memberRole + '\'' +
+                ", memberRole=" + memberRole +
                 ", status='" + status + '\'' +
                 '}';
     }

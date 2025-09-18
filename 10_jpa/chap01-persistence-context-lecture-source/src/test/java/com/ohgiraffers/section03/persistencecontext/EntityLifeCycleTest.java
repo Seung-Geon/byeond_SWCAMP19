@@ -145,13 +145,13 @@ public class EntityLifeCycleTest {
         EntityTransaction transaction2 = entityManager.getTransaction();
         transaction2.begin();
 
-        foundMenu1.setMenuPrice(12000);  // 업데이트 X
-        foundMenu2.setMenuPrice(12000);
+        foundMenu1.setMenuPrice(13000);  // 업데이트 X
+        foundMenu2.setMenuPrice(13000);
 
         transaction2.commit();
 
-        Assertions.assertNotEquals(12000, entityManager.find(Menu.class, 11).getMenuPrice());
-        Assertions.assertNotEquals(12000, entityManager.find(Menu.class, 12).getMenuPrice());
+        Assertions.assertNotEquals(13000, entityManager.find(Menu.class, 11).getMenuPrice());
+        Assertions.assertNotEquals(13000, entityManager.find(Menu.class, 12).getMenuPrice());
     }
 
     @Test

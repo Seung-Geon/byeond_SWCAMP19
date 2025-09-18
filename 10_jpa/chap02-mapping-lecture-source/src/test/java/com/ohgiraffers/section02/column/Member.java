@@ -1,15 +1,12 @@
-package com.ohgiraffers.section01.entity;
+package com.ohgiraffers.section02.column;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.Objects;
 
-@Entity(name = "member_section01")
-@Table(name = "tbl_member_section01")
+@Entity(name = "member_section02")
+@Table(name = "tbl_member_section02")
 public class Member {
     @Id
     @Column(name = "member_no")
@@ -24,7 +21,7 @@ public class Member {
     @Column(name = "nickname")
     private String nickname;
 
-    @Column(name = "phone")
+    @Column(name = "phone", columnDefinition = "varchar(200) default '010-0000-1234'")
     private String phone;
 
     @Column(name = "email")
@@ -34,6 +31,9 @@ public class Member {
     private String address;
 
     @Column(name = "enroll_date")
+//    @Temporal(TemporalType.DATE)      // Date
+    @Temporal(TemporalType.TIME)        // Time
+//    @Temporal(TemporalType.TIMESTAMP) // TIMESTAMP
     private java.util.Date enrollDate;
 
     @Column(name = "member_role")
