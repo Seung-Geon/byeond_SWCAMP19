@@ -1,5 +1,7 @@
 package com.ohgiraffers.springdatajpa.menu.controller;
 
+import com.ohgiraffers.springdatajpa.common.Pagination;
+import com.ohgiraffers.springdatajpa.common.PagingButtonInfo;
 import com.ohgiraffers.springdatajpa.menu.dto.MenuDTO;
 import com.ohgiraffers.springdatajpa.menu.service.MenuService;
 import lombok.extern.slf4j.Slf4j;
@@ -67,7 +69,14 @@ public class MenuController {
      *  1. 기본 한 페이지에 10개의 데이터(size, value)
      *  2. 기본 1페이지부터(0 부터)
      *  3. 기본 오름차순(ASC)
+     * 
+     * 설명.
+     *  쿼리스트링을 쓰는 경우?
+     *  1. 서버로 현재 페이지 정보 전달
+     *  2. 서버로 정렬 기준 전달
+     *  3. 서버로 검색어 전달
     * */
+    
     /* 설명. 페이징 처리 후 */
     @GetMapping("/list")
     public String findMenuList(@PageableDefault Pageable pageable, Model model) {
@@ -75,9 +84,23 @@ public class MenuController {
 
         Page<MenuDTO> menuList = menuService.findMenuList(pageable);
 
+        log.debug("조회할 내용 목록: {}", menuList.getContent());
+        log.debug("총 페이지 수: {}", menuList.getTotalPages());
+        log.debug("총 메뉴 수: {}", menuList.getTotalElements());
+        log.debug("해당 페이지에 표시 될 요소 수: {}", menuList.getSize());
+        log.debug("해당 페이지에 실제 요소 수: {}", menuList.getNumberOfElements());
+        log.debug("Page의 Number가 처음이면(첫 페이지면): {}", menuList.isFirst());
+        log.debug("Page의 Number가 마지막이면(마지막 페이지면): {}", menuList.isLast());
+        log.debug("현재 페이지: {}", menuList.getNumber());
+        log.debug("정렬 기준: {}", menuList.getSort());
+
+        /* 설명. Page 객체를 통해 PagingButtonInfo(front가 페이징 처리 버튼을 그리기 위한 재료를 지닌 타입) 추출 */
+        PagingButtonInfo paging = Pagination.getPagingButtonInfo(menuList);
+
         model.addAttribute("menuList", menuList);
+        model.addAttribute("paging", paging);
+
         return "menu/list";
-        
     }
 }
 
