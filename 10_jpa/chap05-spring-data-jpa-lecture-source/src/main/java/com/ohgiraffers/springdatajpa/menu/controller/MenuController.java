@@ -6,6 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,13 +29,13 @@ public class MenuController {
      *  1. println보다 성능적으로 우수하다.
      *  2. 외부 리소스 파일로 따로 저장 및 송출이 가능하다.
      *  3. 로그레벨에 따른 확인 가능하다.(개발: debug, 서비스: info)
-    * */
+     * */
 //    Logger logger = LoggerFactory.getLogger(MenuController.class);
 //    Logger logger = LoggerFactory.getLogger(getClass());            // 현재 클래스 알아서 넣어줌
 
 
     @Autowired
-    public  MenuController(MenuService menuService) {
+    public MenuController(MenuService menuService) {
         this.menuService = menuService;
     }
 
@@ -59,8 +62,22 @@ public class MenuController {
 //        return "menu/list";
 //    }
 
+    /* 설명.
+     *  @PageableDefault
+     *  1. 기본 한 페이지에 10개의 데이터(size, value)
+     *  2. 기본 1페이지부터(0 부터)
+     *  3. 기본 오름차순(ASC)
+    * */
     /* 설명. 페이징 처리 후 */
+    @GetMapping("/list")
+    public String findMenuList(@PageableDefault Pageable pageable, Model model) {
+        log.debug("pageable: {}", pageable);
 
+        Page<MenuDTO> menuList = menuService.findMenuList(pageable);
 
-
+        model.addAttribute("menuList", menuList);
+        return "menu/list";
+        
+    }
 }
+
