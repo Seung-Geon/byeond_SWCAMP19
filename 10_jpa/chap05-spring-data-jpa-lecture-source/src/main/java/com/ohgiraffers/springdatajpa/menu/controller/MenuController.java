@@ -2,6 +2,7 @@ package com.ohgiraffers.springdatajpa.menu.controller;
 
 import com.ohgiraffers.springdatajpa.common.Pagination;
 import com.ohgiraffers.springdatajpa.common.PagingButtonInfo;
+import com.ohgiraffers.springdatajpa.menu.dto.CategoryDTO;
 import com.ohgiraffers.springdatajpa.menu.dto.MenuDTO;
 import com.ohgiraffers.springdatajpa.menu.service.MenuService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,9 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -101,6 +100,22 @@ public class MenuController {
         model.addAttribute("paging", paging);
 
         return "menu/list";
+    }
+
+    @GetMapping("regist")
+    public void registMenu() {}
+
+    @GetMapping("/category")
+    @ResponseBody       // 핸들러 메소드의 반환형이 View Resolver를 무시해야 할때 (feat. json 문자열로 변환)
+    public List<CategoryDTO> findCategoryList() {
+        return menuService.findAllCategory();
+    }
+
+    @PostMapping("/regist")
+    public String registMenu(MenuDTO newMenu) {
+        menuService.registMenu(newMenu);
+
+        return "redirect:/menu/list";
     }
 }
 

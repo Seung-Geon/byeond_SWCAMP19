@@ -41,7 +41,6 @@ public class FirstController {
         return "first/messagePrinter";
     }
 
-    private static boolean
 
     @GetMapping("modify")
     public void modifyMenu() {}

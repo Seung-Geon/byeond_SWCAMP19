@@ -1,7 +1,10 @@
 package com.ohgiraffers.springdatajpa.menu.service;
 
+import com.ohgiraffers.springdatajpa.menu.dto.CategoryDTO;
 import com.ohgiraffers.springdatajpa.menu.dto.MenuDTO;
+import com.ohgiraffers.springdatajpa.menu.entity.Category;
 import com.ohgiraffers.springdatajpa.menu.entity.Menu;
+import com.ohgiraffers.springdatajpa.menu.repository.CategoryRepository;
 import com.ohgiraffers.springdatajpa.menu.repository.MenuRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -11,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,12 +23,14 @@ import java.util.stream.Collectors;
 @Slf4j
 public class MenuService {
     private final MenuRepository menuRepository;
+    private final CategoryRepository categoryRepository;
     private final ModelMapper modelMapper;
 
 
     @Autowired
-    public MenuService(MenuRepository menuRepository, ModelMapper modelMapper) {
+    public MenuService(MenuRepository menuRepository, CategoryRepository categoryRepository,ModelMapper modelMapper) {
         this.menuRepository = menuRepository;
+        this.categoryRepository = categoryRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -51,7 +57,7 @@ public class MenuService {
                     .collect(Collectors.toList());
     }
 
-    /* 설명. 3. 페이징 처리 후 */
+    /* 설명. 3. findALl() (페이징 처리 후) */
     public Page<MenuDTO> findMenuList(Pageable pageable) {
         /* 설명.
          *  넘어온 Pageable 객체를 커스터마이징
@@ -68,5 +74,24 @@ public class MenuService {
         
         /* 설명. Page는 자체로 stream이다. */
         return menuList.map(menu -> modelMapper.map(menu, MenuDTO.class));
+    }
+
+    /* 설명. 4. jpql 및 native query 활용 */
+    public List<CategoryDTO> findAllCategory() {
+        List<Category> categories = categoryRepository.findAllCategories();
+
+        log.debug("Service 계층에서 값을 가져감");
+        log.debug("{}", categories);
+
+
+        return categories.stream()
+                .map(category -> modelMapper.map(category, CategoryDTO.class)).collect(Collectors.toList());
+
+    }
+
+    /* 설명. 5. insert 진행 (Entity로 변환) */
+    @Transactional
+    public void registMenu(MenuDTO newMenu) {
+        menuRepository.save(modelMapper.map(newMenu, Menu.class));
     }
 }
