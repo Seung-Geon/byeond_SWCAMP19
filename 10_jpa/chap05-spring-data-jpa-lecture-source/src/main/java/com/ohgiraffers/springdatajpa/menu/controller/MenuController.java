@@ -117,5 +117,15 @@ public class MenuController {
 
         return "redirect:/menu/list";
     }
+
+    @GetMapping("/modify")
+    public void modifyMenuPage() {}
+
+    @PostMapping("/modify")
+    public String modifyMenu(MenuDTO modifyMenu) {
+        menuService.modfiyMenu(modifyMenu);
+
+        return "redirect:/menu/" + modifyMenu.getMenuCode();
+    }
 }
 
