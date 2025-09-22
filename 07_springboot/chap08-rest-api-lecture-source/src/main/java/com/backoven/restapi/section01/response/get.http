@@ -1,0 +1,25 @@
+### Get request hello
+GET localhost:8080/response/hello
+
+### GET request random
+GET localhost:8080/response/random
+
+### GET request Message
+GET localhost:8080/response/message
+
+### GET request test
+GET localhost:8080/response/test
+
+### GET request map
+GET localhost:8080/response/map
+
+### GET request image (1. byte[] 방식, 동적)
+GET http://localhost:8080/response/image/bytes/pikachu
+
+### GET request image (2. WebConfig 방식, 정적)
+GET http://localhost:8080/response/image/pikachu.png
+
+### GET request image (3. Resource 방식, 부분적인 동적(캐싱을 사용), 캐시 비활성화, Http 1.0과 호환 가능(Pragma))
+GET http://localhost:8080/response/image/resource/pikachu.png
+Cache-Control: no-cache
+Pragma: no-cache
