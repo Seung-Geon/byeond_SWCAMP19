@@ -103,4 +103,18 @@ public class MenuService {
         Menu foundMenu = menuRepository.findById(modifyMenu.getMenuCode()).get();
         foundMenu.setMenuName(modifyMenu.getMenuName());
     }
+
+    /* 설명. 7. delete 진행 */
+    @Transactional
+    public void deleteMenu(int menuCode) {
+        menuRepository.deleteById(menuCode);
+    }
+
+    /* 설명. 8. 쿼리 메소드 활용하기 */
+    public List<MenuDTO> findMenuPrice(int menuPrice) {
+//        List<Menu> menus = menuRepository.findByMenuPriceGreaterThan(menuPrice);
+        List<Menu> menus = menuRepository.findByMenuPriceBetween(menuPrice, menuPrice + 10000);
+
+        return menus.stream().map(menu -> modelMapper.map(menu, MenuDTO.class)).collect(Collectors.toList());
+    }
 }

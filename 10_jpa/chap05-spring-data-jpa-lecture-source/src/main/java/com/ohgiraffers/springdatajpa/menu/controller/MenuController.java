@@ -127,5 +127,28 @@ public class MenuController {
 
         return "redirect:/menu/" + modifyMenu.getMenuCode();
     }
+
+    @GetMapping("/delete")
+    public void deleteMenuPage() {}
+
+    @PostMapping("/delete")
+    public String deleteMenu(@RequestParam int menuCode) {
+        menuService.deleteMenu(menuCode);
+
+        return "redirect:/menu/list";
+    }
+
+    @GetMapping("/querymethod")
+    public void queryMethodPage() {}
+
+    @GetMapping("/search")
+    public String findMenuPrice(@RequestParam int menuPrice, Model model) {
+        List<MenuDTO> menuList = menuService.findMenuPrice(menuPrice);
+
+        model.addAttribute("menuList", menuList);
+        model.addAttribute("menuPrice", menuPrice);
+
+        return "menu/searchResult";
+    }
 }
 
