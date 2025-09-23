@@ -24,7 +24,7 @@ public class ResponseEntityTestController {
      *   정의하여 사용하는 클래스이다.
      *   (HTTP는 단순한 데이터 전송이 아니라 상태 정보를 포함한 통신 프로토콜이기 때문에 올바른 상태 코드와
      *   헤더를 제공해야 클라이언트가 적절히 반응할 수 있다.
-    * */
+     * */
 
     private List<UserDTO> users;
 
@@ -86,9 +86,34 @@ public class ResponseEntityTestController {
         return ResponseEntity
 //                .ok()
                 .created(URI.create("/entity/users/" + (lastUserNo + 1)))   // Response Header 중 "Location"에 담겨 돌아옴
-                                                                            // 인서트 성공 시 응답
+                // 인서트 성공 시 응답
                 .build();
 
     }
 
+    @PutMapping("users/{userNo}")
+    public ResponseEntity<?> updateUser(@PathVariable int userNo, @RequestBody UserDTO newMember) {
+        UserDTO foundUser = users.stream().filter(user -> user.getNo() == userNo)
+                .collect(Collectors.toList()).get(0);
+
+        foundUser.setId(newMember.getId());
+        foundUser.setPwd(newMember.getPwd());
+        foundUser.setName(newMember.getName());
+
+        return ResponseEntity
+                .created(URI.create("/entity/users/" + userNo))
+                .build();
+    }
+
+    @DeleteMapping("/user/{userNo}")
+    public ResponseEntity<?> removeUser(@PathVariable int userNo) {
+        UserDTO foundUser = users.stream()
+                .filter(user -> user.getNo() == userNo)
+                .collect(Collectors.toList()).get(0);
+        users.remove(foundUser);
+
+        return ResponseEntity
+                .noContent()        // 204
+                .build();
+    }
 }
