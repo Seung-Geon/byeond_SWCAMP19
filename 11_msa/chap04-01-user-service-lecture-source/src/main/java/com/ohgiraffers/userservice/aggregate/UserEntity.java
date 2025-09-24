@@ -16,8 +16,10 @@ public class UserEntity {
     @Column(name = "email", nullable = false, length = 50, unique = true)
     private String email;
 
-    @Column(name = "pwd", nullable = false)
-    private String pwd;
+//    @Column(name = "pwd", nullable = false)
+//    private String pwd;
+    @Column(name = "encypt_pwd", nullable = false)
+    private String encyptPwd;
 
     @Column(name = "name", nullable = false, length = 50)
     private String name;
