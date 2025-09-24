@@ -9,6 +9,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.Collections;
@@ -41,7 +42,10 @@ public class WebSecurity {
                 authz.requestMatchers("/**").permitAll()
 //                        .requestMatchers("/users").permitAll()
                 .anyRequest().authenticated()
-        );
+        )
+                /* 설명. Session 방식이 아닌 JWT Token 방식으로 인증된 회원(Authentication)을 Local Thread로 저장하겠다. */
+                .sessionManagement(session
+                        -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         /* 설명. 매니저를 지닌 필터 등록 */
         http.addFilter(getAuthenticationFilter(authenticationManager()));
