@@ -7,7 +7,7 @@
         <id property = "orderCode" column = "ORDER_CODE"/>
         <result property = "userId" column = "USER_ID"/>
         <result property = "orderDate" column = "ORDER_DATE"/>
-        <result property = "orderTime" column = "ORDER_Time"/>
+        <result property = "orderTime" column = "ORDER_TIME"/>
         <result property = "totalOrderPrice" column = "TOTAL_ORDER_PRICE"/>
         <collection property = "orderMenus" ofType = "com.ohgiraffers.orderservice.aggregate.OrderMenu">
             <id property = "orderCode" column = "ORDER_CODE"/>
