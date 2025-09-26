@@ -1,0 +1,13 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:///C:\lecture\11_msa\config
+
+# 설정용 파일이 local git에 올라가 있어야 추적이 가능 -> .git 폴더가 있어야 한다.

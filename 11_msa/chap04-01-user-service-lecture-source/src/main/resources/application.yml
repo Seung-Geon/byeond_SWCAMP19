@@ -1,5 +1,5 @@
 server:
-  port: 8111
+  port: 0
 
 spring:
   application:
@@ -22,7 +22,17 @@ spring:
 hello:
   message: Welcome to 19th SW-Camp
 
-# 12시간의 만료 시간 + HMackSha 512 비밀키
-token:
-  expiration_time: 43200000
-  secret: V1GIDjlpELuU5mkWDysKZ/hJKoHX6QyxHhtaAJ4pejnGwEWentafdWbD0onYGnK9WGpwZ+pEspHvZ2W32tkgFQ==
+# 설정용 파일로 옮기기
+## 12시간의 만료 시간 + HMackSha 512 비밀키
+#token:
+#  expiration_time: 43200000
+#  secret: V1GIDjlpELuU5mkWDysKZ/hJKoHX6QyxHhtaAJ4pejnGwEWentafdWbD0onYGnK9WGpwZ+pEspHvZ2W32tkgFQ==
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
