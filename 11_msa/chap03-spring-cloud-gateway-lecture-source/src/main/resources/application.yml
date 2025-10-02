@@ -48,32 +48,49 @@ spring:
 
 # ??. gateway? routes ??? ?? ??(? ??? http method ?? ??)? ?? ?? ????.
 
-        - id: user-service-post-user
-          uri: lb://SWCAMP-USER-SERVICE
+#        - id: user-service-post-user
+#          uri: lb://SWCAMP-USER-SERVICE
+#          predicates:
+#            - Path=/user-service/**
+#            - Method=POST
+#          filters:
+#            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+#
+#        - id: user-service-get-user
+#          uri: lb://SWCAMP-USER-SERVICE
+#          predicates:
+#            - Path=/user-service/**
+#            - Method=GET
+#          filters:
+#            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+#            - AuthorizationHeaderFilter
+#
+#        - id: order-service-get
+#          uri: lb://SWCAMP-ORDER-SERVICE
+#          predicates:
+#            - Path=/order-service/**
+#            - Method=GET
+#          filters:
+#            - RewritePath=/order-service/(?<segment>.*), /$\{segment}
+#            - AuthorizationHeaderFilter
+
+
+        - id: catdog-post-service
+          uri: lb://CATDOGSHELTER
+          predicates:
+            - Path=/post-service/**
+          filters:
+            - RewritePath=/post-service/(?<segment>.*), /$\{segment}
+
+        - id: CatDogShelter-user-service
+          uri: lb://CATDOGSHELTER-USER-SERVICE
           predicates:
             - Path=/user-service/**
-            - Method=POST
           filters:
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+#            - AuthorizationHeaderFilter
 
-        - id: user-service-get-user
-          uri: lb://SWCAMP-USER-SERVICE
-          predicates:
-            - Path=/user-service/**
-            - Method=GET
-          filters:
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-            - AuthorizationHeaderFilter
-
-        - id: order-service-get
-          uri: lb://SWCAMP-ORDER-SERVICE
-          predicates:
-            - Path=/order-service/**
-            - Method=GET
-          filters:
-            - RewritePath=/order-service/(?<segment>.*), /$\{segment}
-            - AuthorizationHeaderFilter
 
 token:
   expiration_time: 43200000
-  secret: V1GIDjlpELuU5mkWDysKZ/hJKoHX6QyxHhtaAJ4pejnGwEWentafdWbD0onYGnK9WGpwZ+pEspHvZ2W32tkgFQ==
+  secret: "VKKCjFzrzJQE8oM69GmgavfauYLnHnQeG4k1ab/lrYtrEQMk7o0/3j8KmqM33prEOWs5IdSVhQsbKiV3UzFhHQ=="

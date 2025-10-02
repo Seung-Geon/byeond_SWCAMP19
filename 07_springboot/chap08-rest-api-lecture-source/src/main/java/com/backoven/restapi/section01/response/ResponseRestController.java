@@ -122,9 +122,4 @@ public class ResponseRestController {
                 .contentType(MediaType.IMAGE_PNG)
                 .body(resource);
     }
-
-
-
-
-
 }

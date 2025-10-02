@@ -1,8 +1,10 @@
 package com.ohgiraffers.userservice.service;
 
 import com.ohgiraffers.userservice.aggregate.UserEntity;
+import com.ohgiraffers.userservice.dto.MemberDTO;
 import com.ohgiraffers.userservice.dto.ResponseOrderDTO;
 import com.ohgiraffers.userservice.dto.UserDTO;
+import com.ohgiraffers.userservice.dto.UserImpl;
 import com.ohgiraffers.userservice.infrastructure.OrderServiceClient;
 import com.ohgiraffers.userservice.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +57,7 @@ public class UserServiceImpl implements UserService{
 
         userRepository.save(userEntity);
     }
-    
+
 
     /* 설명. 단순 회원정보 조회 -> 회원정보 + 회원의 주문내역(Order(다른 도메인)) */
     @Override
@@ -89,7 +91,14 @@ public class UserServiceImpl implements UserService{
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ENTERPRISE"));
 
-        return new User(loginUser.getEmail(), loginUser.getEncyptPwd(), true,
-                true, true, true, grantedAuthorities);
+//        return new User(loginUser.getEmail(), loginUser.getEncyptPwd(), true,
+//                true, true, true, grantedAuthorities);
+        MemberDTO memberDTO = new MemberDTO();  // 이 객체에 username, password, authorities빼고 나머지 다믕ㅁ
+        UserImpl userImpl =
+                new UserImpl(loginUser.getEmail(),
+                        loginUser.getEncyptPwd(),
+                        grantedAuthorities);
+        userImpl.setDetails(memberDTO);
+        return userImpl;
     }
 }
