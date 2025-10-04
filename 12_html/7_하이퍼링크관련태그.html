@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>하이퍼링크 관련 태그</h1>
+    <h3>a 태그(anchor 태그)를 이용한 하이퍼링크 텍스트</h3>
+    <!-- ul>(li>a)*3 -->
+    <ul>
+        <li><a href="1_글자관련태그.html">글자 관련 태그</a></li>
+        <li><a href="3_표관련태그.html">표 관련 태그</a></li>
+        <li><a href="5_이미지관련태그.html">이미지 관련 태그</a></li>
+    </ul>
+
+    <h3>네트워크가 연결되어 있다면 외부 다른 웹 사이트로 연결 가능(GET 요청)</h3>
+    <ul>
+        <li><a href="https://www.naver.com" target = "_self">네이버</a></li>
+        <li><a href="https://www.google.com" target = "_blacnk">구글</a></li>
+        <li><a href="https://www.daum.net" target = "_blank">다음</a></li>
+    </ul>
+
+    <a href="http://www.w3schools.com">
+        <img src="sample/image/tower1.PNG" alt = " 가자3로" width = "150px" height="100px">
+
+    </a>
+
+    <!-- 한 페이지 내에서 점프하는 앵커 태그 만들기 -->
+    <!-- ul>(li>a)*3 -->
+    <ul id = "top">
+        <li><a href="#content1">본문내용1</a></li>
+        <li><a href="#content2">본문내용2</a></li>
+        <li><a href="#content3">본문내용3</a></li>
+    </ul>
+
+    <h4 id = "content1"> 본문내용 1</h4>
+    <pre>  
+        Contrary to popular belief, Lorem Ipsum is not simply random text. 
+        It has roots in a piece of classical Latin literature from 45 BC, 
+        making it over 2000 years old. Richard McClintock, 
+        a Latin professor at Hampden-Sydney College in Virginia, 
+        looked up one of the more obscure Latin words, consectetur, 
+        from a Lorem Ipsum passage, and going through the cites of the word in classical literature, 
+        discovered the undoubtable source. 
+        Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" 
+        (The Extremes of Good and Evil) by Cicero, 
+        written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. 
+        The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+        The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. 
+        Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, 
+        accompanied by English versions from the 1914 translation by H. Rackham.
+    </pre>
+    <h4 id = "content2"> 본문내용 2</h4>
+    <pre>
+        There are many variations of passages of Lorem Ipsum available, 
+        but the majority have suffered alteration in some form, 
+        by injected humour, or randomised words which don't look even slightly believable. 
+        If you are going to use a passage of Lorem Ipsum, 
+        you need to be sure there isn't anything embarrassing hidden in the middle of text.
+        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, 
+        making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, 
+        combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. 
+        The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+    </pre>
+    <h4 id = "content3"> 본문내용 3</h4>
+    <pre>
+        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. 
+        The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, 
+        as opposed to using 'Content here, content here', 
+        making it look like readable English. 
+        Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, 
+        and a search for 'lorem ipsum' will uncover many web sites still in their infancy. 
+        Various versions have evolved over the years, sometimes by accident, 
+        sometimes on purpose (injected humour and the like).
+    </pre>
+
+    <a href="#top">top</a>
+</body>
+</html>
