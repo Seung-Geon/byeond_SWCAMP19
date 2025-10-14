@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @keyframes trans1 {
+            from {
+                background: green;
+            }
+            to {
+                background: yellow;
+                border-radius: 50px;
+                transform: rotateX(360);
+                border: 3px solid red;
+            }
+        }
+
+        @keyframes trans2 {
+            0% {
+                background-color: green;
+                border: 3px solid black;
+            }
+            30% {
+                transform: translate(50px, 50px);
+            }
+
+            50% {
+                background-color: hotpink;
+                transform: scale(1.2);
+                border: 3px solid yellow;
+            }
+
+            100% {
+                background-color: blue;
+                transform: rotateZ(45deg);
+                border: 3px solid red;
+            }
+        }
+
+        .div1 {
+            margin: 100px;
+            width: 100px;
+            height: 100px;
+            background: gray;
+            animation-name: trans1;
+            animation-duration: 5s;
+            /* 애니메이션의 진행 방향 alternate-reverse: 역방향(to -> from) */
+            /* 
+                normal: 정방향
+                reverse: 역방향
+                alternate: 정방향과 역방향 번갈아
+                alternate-reverse: 역방향과 정방향 번갈아
+            */
+            animation-direction: alternate;
+            /* 
+                숫자값: 지정한 횟수만큼 반복
+                infinite: 무한히 반복
+            */
+            animation-iteration-count: infinite;
+        }
+
+        .div2 {
+            margin: 100px;
+            width: 100px;
+            height: 100px;
+            animation-name: trans2;
+            animation-duration: 3s;
+            /* 애니메이션의 진행 방향 alternate-reverse: 역방향(to -> from) */
+            animation-direction: normal;
+            /* 애니메이션 진행 횟수 */
+            animation-iteration-count: infinite;
+
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <h1>애니메이션</h1>
+    <p>@keyframes를 활용해 변형들을 묶어서 적용하면 애니메이션의 개념이 된다.</p>
+    <div class="div1"></div>
+    <div class="div2"></div>
+    <img src="sample/image/city1.PNG" alt="">
+</body>
+</html>

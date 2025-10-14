@@ -46,17 +46,106 @@
 
             position: absolute;
         }
+
+        .vis-test {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+        }
+
+        .vis-test1 {
+            background: red;
+        }
+
+        /* visibility는 존재하지만 안보이게, display: none은 존재 자체가 X */
+        .vis-test2 {
+            background: yellow;
+            /* 안보이게 하는 것에는 두 가지 방법이 존재
+                1. 공간은 차지하지만 안보이게
+                2. 공간도 안차지하고 안보이게
+            */
+            /* 1. 공간은 차지하지만 안보이게 */
+            visibility: hidden; 
+            /* 기본값: 보임 */
+            visibility: visible;
+             /* 2. 공간도 차지하지 않음 */
+             /* 이 속성을 활용한 것으로는 대표적으로 modal 창이 있다. */
+            /* display: none; */
+
+        }
+
+        .vis-test3 {
+            background: green
+        }
+
+        .wrap{
+            position: relative
+        }
+
+        .z-test {
+            width: 150px;
+            height:150px;
+            border: 1px solid black;
+        }
+
+        .z-test1 {
+            background: yellow;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            z-index: 3;
+        }
+
+        .z-test2 {
+            background: red;
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            z-index: 2;
+        }
+
+        .z-test3 {
+            background: green;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 1;
+        }
+        
+
     </style>
     <title>Document</title>
-</head>
-<body>
+</head> 
+<body>0
     <h1>배치 관련 스타일</h1>
-    <h3>절대 위치와 상태위치(중요!)</h3>
+    <h3>절대 위치와 상대위치(중요!)</h3>
     <!-- div.outer>(div.positioning)*3 -->
-     <div class="outer">
+    <div class="outer">
         <div class="positioning first"></div>
         <div class="positioning second"></div>
         <div class="positioning third"></div>
-     </div>
+    </div>
+
+    <hr>
+
+    <h3>visiblity</h3>
+    <p>페이지에 특정 영역을 보이거나 보이지 않게 하는 속성</p>
+    <!-- div.vis-test.vis-test$*3 -->
+    <!-- 띄어쓰기를 구분자로 해서 클래스 이름을 두개로 인식 -->
+    <div class="vis-test vis-test1"></div>
+    <div class="vis-test vis-test2"></div>
+    <div class="vis-test vis-test3"></div>
+
+    <hr>
+
+    <h3>z-index</h3>
+    <p>페이지 안의 요소들을 위로 쌓는 속성</p>
+    <div class = "wrap">
+        <!-- div.z-test.z-test${요소$}*3 -->
+        <div class="z-test z-test1">요소1</div>
+        <div class="z-test z-test2">요소2</div>
+        <div class="z-test z-test3">요소3</div>
+    </div>
+
 </body>
 </html>
