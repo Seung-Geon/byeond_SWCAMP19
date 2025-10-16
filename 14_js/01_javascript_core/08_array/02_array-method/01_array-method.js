@@ -42,6 +42,8 @@ console.log(...idol1);  // 배열의 요소를 나열해주는 것(스프레드 
 console.log(`idol3를 기준으로 idol1, idol2를 concat: ${idol3.concat(idol1, idol2)}`);
 console.log(`idol3를 기준으로 idol1, idol2를 concat: ${[...idol3, ...idol1, ...idol2]}`);
 
+console.log("============================");
+
 /* slice(선택적 요소 복사) / splice(선태적 인덱스 주요 위치요소 제거맞추기) */
 const front = ['HTML', 'CSS', 'JavaScript', ' Vue'];
 
@@ -50,6 +52,8 @@ console.log(`front: ${front}`);
 
 console.log(`front.splice(): ${front.splice(2, 2, 'React')}`);  // 2번 인덱스부터 2길이만큼 치환
 console.log(`front: ${front}`);
+
+console.log("============================");
 
 /* Join(배열에 담긴 배열의 요소들을 구분자를 포함한 하나의 문자열로 반환) */
 const snackList = ['사탕', '초코렛', '껌', '마이쮸'];
