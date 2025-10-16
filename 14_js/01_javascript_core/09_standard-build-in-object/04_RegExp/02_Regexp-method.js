@@ -39,6 +39,8 @@ console.log(regex2.exec(test));
 const regex3 = /줄$/;
 console.log(regex1.exec(test));
 
+console.log("========================");
+
 const regex4 = /줄$/gm;
 console.log(regex4.exec(test));
 console.log(regex4.exec(test));
