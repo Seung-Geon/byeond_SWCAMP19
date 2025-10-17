@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .area {
+            width: 100px;
+            height: 100px;
+            border: 1px solid lightgray;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <h1>04. css의 선택자를 이용한 요소 노드 취득</h1>
+    <div class="area">
+        <p>first</p>
+    </div>
+    <div class="area">
+        <p>second</p>
+    </div>
+
+    <script>
+        const $area = document.querySelector('.area');  // 클래스가 area인 하나만 가져오기
+        console.log($area);
+
+        const $areas = document.querySelectorAll('.area');  // 클래스가 area인 모든 요소 가져오기
+        console.log($areas);
+
+        /* css속성을 건드릴 때 property명 대신 대괄호를 스면 css 속성명으로 작성 가능 */
+        const $firstP = document.querySelector('p');
+        $firstP.style['background-color'] = 'green';
+    </script>
+</body>
+</html>
