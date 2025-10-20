@@ -7,6 +7,19 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- 
+        반응형 변수: vue.js에서 ref()나 reactive()와 같은 함수를 사용하여 
+                    관리 될 데이터와 반응성 변수를 생성할 수 있다. 
+                    이러한 반응성 변수는 vue와 반응성 시스템에 의해 관리되며, 
+                    변수 값이 변경될 때마다 html 요소(tamplate영역)에 자동 반영된다.
+
+        밥응성(Reactivity): vue에서 데이터를 DOM에 바인딩하면 데이터 값이 변경될 때마다 
+                            해당 데이터를 활용하는 DOM이 자동으로 업데이트 되는 것을 말한다.
+
+        데이터 바인딩(Data Binding): vue에서 데이터와 DOM을 연결해서 html 템플릿에 
+                                    동적으로 렌더링 할 수 있도록 엮여 있다는 개념
+    -->
+
     <div id="app">
         <h5>{{ message }}</h5>      
         <!-- {{ m }}: 보간법(interpolation): 
@@ -18,9 +31,8 @@
 
         <h5>Raw Html</h5>
         <p>v-html directiveL: <span v-html = "rawHtml"></span></p>  <!--  v-xxx: vue directive: 지시 -->
-
         <p>text interpolation: {{rawHtml}}</p>
-
+        <p>v-text directive: <span v-text = "rawHtml"></span></p>
 
     </div>
 
