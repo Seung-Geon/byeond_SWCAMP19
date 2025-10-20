@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function increase(number) {
+            const promise = new Promise((resolve, reject) => {  // 성공시 실행할 함수와 실패시 실행할 함수를 넣음
+                setTimeout(() => {
+                    const result = number + 10;
+
+                    // 예외 상황(실패)
+                    /* promise: 비동기 결과(성공/실패)를 가진 객체(※콜백 지옥을 피하기 위해 사용됨※)
+                        비동기 함수들을 동기식으로 진행할 때 필수적인 객체(일종의 비동기 함수 포장지)
+                    */
+                    if(result > 50) {
+                        const e = new Error('NumbeerTooBig');
+
+                        return reject(e);
+                    }
+
+                    // 성공
+                    return resolve(result);
+                }, 1000);
+            });
+
+            return promise;
+        }
+
+        // console.log(increase(0));
+        // console.log(increase(10));
+        // console.log(increase(20));
+        // console.log(increase(30));
+        // console.log(increase(40));
+        // console.log(increase(50));
+
+       // then에 콜백함수를 넣으면 콜백 함수의 인자로 들어감
+        increase(0).then(result => {
+            console.log('then의 콜백함수에 넘어온 result:', result);
+            return increase(result);
+
+        }).then(result => {
+            console.log('then의 콜백함수에 넘어온 result:', result);
+            return increase(result);
+        }).then(result => {
+            console.log('then의 콜백함수에 넘어온 result:', result);
+            return increase(result);
+        }).then(result => {
+            console.log('then의 콜백함수에 넘어온 result:', result);
+            return increase(result);
+        }).then(result => {
+            console.log('then의 콜백함수에 넘어온 result:', result);
+            return increase(result);
+        }).then(result => {
+            console.log('then의 콜백함수에 넘어온 result:', result);
+            return increase(result);
+        }).then(result => {
+            console.log('then의 콜백함수에 넘어온 result:', result);
+            return increase(result);
+        }).then(result => {
+            console.log('then의 콜백함수에 넘어온 result:', result);
+            return increase(result);
+        }).then(result => {
+            console.log('then의 콜백함수에 넘어온 result:', result);
+            return increase(result);
+        }).catch(error => console.log(error))
+        .finally(() => console.log('반드시 실해오디고 반드시 해야할 작업'));
+
+        /*
+            then: 이전 작업이 성공적으로 완료가 되었을때 promis에 담긴 성공(resolve에 담긴)을 
+                    추출하여 확인하는 콜백함수가 동작하는 메소드
+            catch: 이전 작업이 실패했을 때(에러 발생 시) promis에 담긴 길패(reject에 담긴)를
+                    추출하여 콜백함수가 동작하는 메소드
+            finally: 비동기 작업이 성공하든 실패하든 상관없이 항상 콜백함수가 동작하는 메소드
+                    (이 메소드들을 통해 들여쓰기가 줄어들어 가독성이 좋아지고 유지보성이 향상된다.)
+        */
+        /* then이 실행되어야 하기 때문에 비동기 문제의 동기화가 이루어짐 */
+
+    </script>
+    
+</body>
+</html>
+

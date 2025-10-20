@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function increase(number) {
+            const promise = new Promise((resolve, reject) => {  // 성공시 실행할 함수와 실패시 실행할 함수를 넣음
+                setTimeout(() => {
+                    const result = number + 10;
+
+                    if(result > 50) {
+                        const e = new Error('NumbeerTooBig');
+
+                        return reject(e);
+                    }
+
+                    // 성공
+                    return resolve(result);
+                }, 1000);
+            });
+
+            return promise;
+        }
+
+    /*
+        await의 두 가지 기능
+        1. await가 달린 함수(increase)의 결과인 promise 객체에 담긴 결과(성공실피)를 반환한다.
+        2. await가 달린 비동기 처리들은 그들 간에는 동기식으로 동작하게 된다.
+            (앞선 비동기의 결과로 다음 비동기 함수를 실행할 수 없다.)
+
+        then 메소드처럼 callback함수는 필요 없ㅈ디만 전체를 감싸는 async 함수는 반드시 필요하다.
+        (주의: await를 스기 위해 함수에 async를 추가하면 함수의 반환값이 promis가 된다.)
+    */
+        async function run() {
+            let result = await increase(0);
+            console.log(result);
+
+            result = await increase(result);
+            console.log(result);
+
+            result = await increase(result);
+            console.log(result);
+
+            result = await increase(result);
+            console.log(result);
+
+            result = await increase(result);
+            console.log(result);
+
+            return -1
+        }
+        
+        console.log(run());
+        //반환 받은 것을 활용하기 위해서는 다음 중 하나는 사용해야하므로 반드시 알아둘 것
+        /* 1. then 방식 */
+        run().then (result => console.log('async의 결과인 promis에 담긴 값: ', result));
+
+        /* 2. async await 방식 */
+        async function run2() {
+            let result = await run();
+            console.log('async의 결과인 promise에 담긴 값:', result);
+        }
+
+        run2();
+</script>
+
+
+</body>
+</html>
+
+<!-- 
+    비동기 함수를 동기화
+    1. callback hell
+
+    2. then(catch, finally)
+
+    3. await(async func)
+-->
