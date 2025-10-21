@@ -28,9 +28,12 @@
         </div>
     </div>
 
+    <div id="step02">
+        <div class="classObj">{{ classObj }}</div>
+    </div>
 
     <script>
-        const {createApp, ref} = Vue;
+        const {createApp, ref, reactive} = Vue;
 
         createApp({
 
@@ -44,6 +47,22 @@
                 };
             }
         }).mount("#step01");
+
+                createApp({
+
+            setup() {
+                const isActive = ref(true);
+                const isSize = ref(true);
+                // reactive 안에 ref나 reactive를 넣는 것은 안티패턴(넣지 않는 것을 권장 지금은 예제니까 하는 것)
+                const classObj = reactive({
+                    active: isActive,
+                    static: isSize
+                });
+                return {
+                    classObj
+                };
+            }
+        }).mount("#step02");
     </script>
 </body>
 </html>

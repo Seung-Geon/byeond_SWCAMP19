@@ -28,11 +28,11 @@
 
     /*
         await의 두 가지 기능
-        1. await가 달린 함수(increase)의 결과인 promise 객체에 담긴 결과(성공실피)를 반환한다.
+        1. await가 달린 함수(increase)의 결과인 promise 객체에 담긴 결과(성공실패)를 반환한다.
         2. await가 달린 비동기 처리들은 그들 간에는 동기식으로 동작하게 된다.
             (앞선 비동기의 결과로 다음 비동기 함수를 실행할 수 없다.)
 
-        then 메소드처럼 callback함수는 필요 없ㅈ디만 전체를 감싸는 async 함수는 반드시 필요하다.
+        then 메소드처럼 callback함수는 필요 없지만 전체를 감싸는 async 함수는 반드시 필요하다.
         (주의: await를 스기 위해 함수에 async를 추가하면 함수의 반환값이 promis가 된다.)
     */
         async function run() {
