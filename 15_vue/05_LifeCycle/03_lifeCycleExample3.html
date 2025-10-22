@@ -90,18 +90,19 @@
             <div class = "appContainer">
                 <!-- 쇼핑하기 -->
                 <template v-if = "!viewingState">
-                    <div class="wine-card" v-for = "wine in pageWine" :key = "wine.id">
+                    <div class = "wine-card" v-for = "wine in pageWine" :key = "wine.id">
                         <p>{{ wine.wine }}</p>
                         <img class = 'image' :src = "wine.image" alt = "와인 이미지">
-                        <button @click = "likeWine(wine.id)">like</button>
-                        <button @click = "hateWine(wine.id)">hate</button>
+                        <button v-if = "!likes.includes(wine.id)" @click = "likeWine(wine.id)">like</button>
+                        <button v-if = "likes.includes(wine.id)" @click = "hateWine(wine.id)">hate</button>
                     </div>
                 </template>
 
                 <!-- 담기 완료(쇼핑 완료) -->
                 <template v-else>
-                    <div>
-                        
+                    <div class = "wine-card" v-for = "wine in totalLikes" :key = "wine.id">
+                        <p>{{ wine.wine }}</p>
+                        <img class = 'image' :src = "wine.image" alt = "와인 이미지">
                     </div>
                 </template>
             </div>
@@ -124,7 +125,8 @@
                 next: 10,       // 한 페이지의 끝 와인
 
                 viewingState: false, // 담기 완료 버튼을 누르기 전(와인 목력 보기)과 후(선택한 와인 목록 보기)
-                likes: []           // "좋아요" 한 와인 목록(와인의 id만 추출)
+                likes: [],           // "좋아요" 한 와인 목록(와인의 id만 추출)
+                totalLikes: []      // '좋아요' 한 와인 목록(와인의 전체 데이터를 추출)
             })
 
             const fetchWines = async () => {
@@ -160,6 +162,12 @@
 
             const toggleViewingState = () => {
                 state.viewingState = !state.viewingState;
+
+                /* totalLikes 추가 후 */
+                if(state.viewingState) {
+                    /* 최초 가져온 와인들을 순회하며 사용자가 '좋아요'한 목록(id)와 일치하는 와인 객체들을 다시 배열로 만듦 */
+                    state.totalLikes = state.wines.filter((wine) => state.likes.includes(wine.id));
+                }
             }
 
             const likeWine = (id) => {
@@ -216,7 +224,9 @@
 
                         likes,
                         likeWine,
-                        hateWine
+                        hateWine,
+                        totalLikes
+
                     } = useWines();
 
                 return {
@@ -235,7 +245,8 @@
 
                     likes,
                     likeWine,
-                    hateWine
+                    hateWine,
+                    totalLikes
                 };
             }
 
