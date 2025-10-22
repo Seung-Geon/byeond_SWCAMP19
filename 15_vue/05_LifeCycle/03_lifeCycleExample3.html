@@ -79,18 +79,31 @@
         </div>
         <template v-else>
             <div class = "btn-group">
-                <button class="btn">black</button>
-                <button class="btn">next</button>
+                <button class="btn" @click = "goBack">back</button>
+                <button class="btn" @click = "goNext">next</button>
             </div>
 
             <div>
-                <p>내가 '좋아요'한 와인 목록: </p>
+                <p>내가 '좋아요'한 와인 목록: {{ likes }}</p>
+                <button @click = "toggleViewingState">{{ viewingState ? "쇼핑하기" : "쇼핑완료" }}</button>
             </div>
             <div class = "appContainer">
-                <div class="wine-card" v-for = "wine in pageWine" :key = "wine.id">
-                    <p>{{ wine.wine }}</p>
-                    <img class = 'image' :src = "wine.image" alt = "와인 이미지">
-                </div>
+                <!-- 쇼핑하기 -->
+                <template v-if = "!viewingState">
+                    <div class="wine-card" v-for = "wine in pageWine" :key = "wine.id">
+                        <p>{{ wine.wine }}</p>
+                        <img class = 'image' :src = "wine.image" alt = "와인 이미지">
+                        <button @click = "likeWine(wine.id)">like</button>
+                        <button @click = "hateWine(wine.id)">hate</button>
+                    </div>
+                </template>
+
+                <!-- 담기 완료(쇼핑 완료) -->
+                <template v-else>
+                    <div>
+                        
+                    </div>
+                </template>
             </div>
         </template>
 
@@ -109,6 +122,9 @@
                 pageWine: [],   // 한 페이지에서 뿌려질 와인이 담길 배열
                 index: 0,       // 한 페이지의 시작 와인
                 next: 10,       // 한 페이지의 끝 와인
+
+                viewingState: false, // 담기 완료 버튼을 누르기 전(와인 목력 보기)과 후(선택한 와인 목록 보기)
+                likes: []           // "좋아요" 한 와인 목록(와인의 id만 추출)
             })
 
             const fetchWines = async () => {
@@ -119,6 +135,42 @@
 
                 state.wines = data;
                 state.pageWine = state.wines.slice(state.index, state.next);
+            }
+
+            const goBack = () => {
+                if(state.index > 9){
+                    state.index -= 10;
+                    state.next -= 10;
+                    state.pageWine = state.wines.slice(state.index, state.next);
+                } else {
+                    alert("그만 뒤로 가");
+                }
+            }
+
+            const goNext = () => {
+                if(state.index + 10 < state.wines.length) { // 다음 10개의 와인을 가져올 수 있는 경우
+                    state.index += 10;
+                    state.next += 10;
+                    state.pageWine = state.wines.slice(state.index, state.next);    
+                } else {                                    // 마지막 페이지가 10개의 와인을 충족하지 못하는 경우
+                    alert("마지막 페이지야!");
+                    state.pageWine = state.wine.slice(state.index, state.wines.length);
+                }
+            }
+
+            const toggleViewingState = () => {
+                state.viewingState = !state.viewingState;
+            }
+
+            const likeWine = (id) => {
+                if(!state.likes.includes(id)) state.likes.push(id)  // 기존에 '좋아요' 한 적 없는 와인일 경우
+            }
+            
+            const hateWine = (id) => {
+                const index = state.likes.indexOf(id);
+                if(index > -1) {
+                    state.likes = state.likes.filter((item) => item != id);
+                }
             }
 
             onMounted(async () => {
@@ -137,7 +189,10 @@
             })
 
             /* state가 관리중인 객체의 각 프로퍼티를 뜯어서 ref로 관리되게 한 후 다시 객체로 만들어 반환 */
-            return {...toRefs(state)}
+            return {...toRefs(state), 
+                goBack, goNext, 
+                toggleViewingState, 
+                likeWine, hateWine}
         };
 
         createApp({
@@ -151,7 +206,17 @@
                         wines,
                         pageWine,
                         index,
-                        next
+                        next,
+
+                        goBack,
+                        goNext,
+
+                        viewingState,
+                        toggleViewingState,
+
+                        likes,
+                        likeWine,
+                        hateWine
                     } = useWines();
 
                 return {
@@ -160,7 +225,17 @@
                     wines,
                     pageWine,
                     index,
-                    next
+                    next,
+
+                    goBack,
+                    goNext,
+
+                    viewingState,
+                    toggleViewingState,
+
+                    likes,
+                    likeWine,
+                    hateWine
                 };
             }
 
