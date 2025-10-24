@@ -6,13 +6,20 @@
 -->
 <template>
   <header>
-    <h2>basic router</h2>
+    <!-- <h2>basic router</h2>
     <nav>
       <RouterLink to = "/" active-class = "active" replace>Home</RouterLink>
       <RouterLink to = "/pathvariable/1" active-class = "active" replace>PathVariable</RouterLink>
       <RouterLink to = "/queryString?name=홍길동&age=20" active-class = "active" replace>queryStrintg</RouterLink>
 
+    </nav> -->
+    <h2>nested router</h2>
+    <nav>
+      <RouterLink to = "/" active-class = "active" replace>Home</RouterLink>
+      <RouterLink to = "/nested/home" active-class = "active" replace>중첩</RouterLink>
+      <RouterLink to = "/nested/view" active-class = "active" replace>중첩</RouterLink>
     </nav>
+
   </header>
 
   <main>
