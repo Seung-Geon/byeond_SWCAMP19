@@ -18,7 +18,7 @@ const router = createRouter({
             // component: RootRouter,
             component: () => import('@/views/02_nestedRouter/RootRouter.vue'),
 
-            /* children 이후(중첩된 라우팅) 경로는 '/'를 사용하면 안된다.(첫 경로는 '/'를 써야함) */
+            /* children 이후(중첩된 라우팅) 경로는 '/'를 사용하면 안된다.(첫 경로는 '/'를 써야함ㅁㅂㅂ2ㅁㅂ2) */
             children: [
                 {
                     path: 'home',
