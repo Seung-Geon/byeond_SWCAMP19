@@ -17,12 +17,26 @@ public class CalculatorController {
         this.service = service;
     }
 
-    @GetMapping("/plus")
-    public ResponseEntity<CalculatorDTO> plusTwoNumbers(CalculatorDTO calculatorDTO){
-         log.info("calculatorDTO = {}", calculatorDTO);
-         int result = service.plusTwoNumbers(calculatorDTO);
-         calculatorDTO.setSum(result);
+    @GetMapping("/health")
+    public String healthCheck() {
+         return "I'm Alive!";
+    }
 
-         return ResponseEntity.ok().body(calculatorDTO);
+//    @GetMapping("/plus")
+//    public ResponseEntity<CalculatorDTO> plusTwoNumbers(CalculatorDTO calculatorDTO){
+//         log.info("calculatorDTO = {}", calculatorDTO);
+//         int result = service.plusTwoNumbers(calculatorDTO);
+//         calculatorDTO.setSum(result);
+//
+//         return ResponseEntity.ok().body(calculatorDTO);
+//    }
+
+    @PostMapping("/plus")
+    public ResponseEntity<CalculatorDTO> plusTwoNumbers(@RequestBody CalculatorDTO calculatorDTO){
+        log.info("calculatorDTO = {}", calculatorDTO);
+        int result = service.plusTwoNumbers(calculatorDTO);
+        calculatorDTO.setSum(result);
+
+        return ResponseEntity.ok().body(calculatorDTO);
     }
 }
