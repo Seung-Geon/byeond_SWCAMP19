@@ -28,7 +28,17 @@
         // const response = await fetch(`http://localhost:5173/api/plus?num1=${num1.value}&num2=${num2.value}`);
 
         /* 이 후 코드는 post 요청에 데이터는 request body를 활용(-> 백엔드도 수정) */
-        const response = await fetch(`http://localhost:5173/api/plus`, {
+        // const response = await fetch(`http://localhost:5173/api/plus`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json;charset=utf-8;'
+        //     },
+        //     body: JSON.stringify({num1: num1.value, num2: num2.value})
+        // });
+
+
+        /* 4. 백엔드에서 CORS, 프론트에서 X(프론트와 백엔드 모두 컨테이너화) */
+        const response = await fetch(`http://localhost:8055/plus`, {    // 웹브라우저에서 인식하는 url -> localhost=host pc
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8;'
