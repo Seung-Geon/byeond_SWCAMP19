@@ -1,32 +1,64 @@
-## docker-compose를 사용하면 여러개의 이미지 및 컨테이너를 다룰 수 있다.
-
 services:
-  springboot-app:
-    build:
-      context: ./chap01_01_bootprojecct
-      dockerfile: Dockerfile
-    image: sg0040/boot_19_project
-    container_name: boot-container
+  mariadb-persist:                                    
+    image: mariadb:latest
+    container_name: mariadb-persist
+    environment:
+      - MARIADB_ROOT_PASSWORD=root1234
+      - MARIADB_DATABASE=calcdb
     ports:
-      - "8055:7777"
+      - "3310:3306"
+    volumes:
+      - mariadb-volume:/var/lib/mysql
+      - mariadb-logs:/var/log/mysql
     networks:
       - camp-net
+    restart: always
+    command: >                                        
+      --log-error=/var/log/mysql/error.log
+      --general-log=1
+      --general-log-file=/var/log/mysql/general.log
+      --slow-query-log=1
+      --slow-query-log-file=/var/log/mysql/slow.log
+      --long-query-time=2
+    healthcheck:                                      
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  springboot-app:
+    build:
+      context: ./chap02_01_bootproject
+    image: sg0040/calc-volume:latest                  
+    container_name: spring-calc-with-db               
+    ports:
+      - "8055:7777"                                   
+    networks:
+      - camp-net
+    depends_on:                                       
+      mariadb-persist:
+        condition: service_healthy
+    restart: always
 
   vue-app:
     build:
-      context: ./chap01_02_vueproject
-      dockerfile: Dockerfile
+      context: ./chap02_02_vueproject
     image: sg0040/vue_19_project
-    container_name: vue-container
+    container_name: vue-container-integrated          
     ports:
       - "8011:5173"
     networks:
       - camp-net
+    depends_on:                                      
+      - springboot-app
+    restart: always
 
-## 네트워크 드라이버 옵션
-## 1. bridge: 기본 값, 대부분의 경우에 적합하며 컨테이너간 사설 네트워크
-## 2. host: 호스트 네트워크를 직접 사용, 성능은 좋지만 보안에 취약하며 포트가 겹칠 수 있음
-## 3. none: 네트워크 기능 없이 완전히 격리된 상태
+volumes:                                              
+  mariadb-volume:
+    driver: local
+  mariadb-logs:
+    driver: local
+
 networks:
   camp-net:
     driver: bridge
