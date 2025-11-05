@@ -1,0 +1,23 @@
+## dep: Deployments 
+
+apiVersion: apps/v1 ## 'kubectl api-resources'를 터미널에 입력하면 밑의 kind와 매칭되는 버전을 알려줌
+kind: Deployment
+metadata:
+  name: boot001dep
+spec:
+  selector:
+    matchLabels:
+      app: boot001kube
+  replicas: 3 ## 레플리카셋(->3개의 백엔드 컨테이너를 뛰우겠다)
+  template:
+    metadata:
+      labels:
+        app: boot001kube
+    spec:
+      containers:
+      - name: boot-container
+        image: sg0040/k8s_19_boot:latest # 태깅해야 나중에 k8s에 용이함!
+                                          ## !!쿠버네티스할 떄는 태깅을 해줘야 제대로 인식된다!!
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 7777 ## 내외부가 동일한 포트를 사용(7777:7777)
