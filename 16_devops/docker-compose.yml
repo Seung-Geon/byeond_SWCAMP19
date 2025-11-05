@@ -13,6 +13,12 @@ services:
     networks:
       - camp-net
     restart: always
+    ## error.log: 에러 발생시 쌓이는 로그 파일
+    ## general.log: 일반 쿼리 로그가 쌓이는 로그 파일
+    ## slow.log: 느린 쿼리 로그가 쌓이는 로그 파일(2초 이상)
+
+    ## 실행 중인 mariadb-persist 컨테이너로 들ㄹ어가서 log 파일 확인
+    ## docker exec -it mariadb-persist tail -f /var/log/mysql/general.log
     command: >                                        
       --log-error=/var/log/mysql/error.log
       --general-log=1
@@ -20,6 +26,13 @@ services:
       --slow-query-log=1
       --slow-query-log-file=/var/log/mysql/slow.log
       --long-query-time=2
+    
+    ## healthcheck (컨테이너 상태 확인)
+    ## - DB가 완전히 준비 되었는지 여러번 시도
+    ## test: 실ㄹ행할 감시 대상(DB연결 + InnoDB 초기화 확인)
+    ## interval: 10초마다 체크
+    ## timeout: 5초간 대기하다 응답 없으면 실패
+    ## retries: 5번 시도
     healthcheck:                                      
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 10s
