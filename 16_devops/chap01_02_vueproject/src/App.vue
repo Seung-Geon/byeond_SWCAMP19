@@ -65,7 +65,7 @@
         // });     
 
         /* 7. 백엔드에서 X, 프론트에서 X (k8s의 ingress를 활용하는 방식) */
-        /* 80포트는 생략 가능 */
+        /* 80포트는 생략 가능dock */
         // const response = await fetch(`http://localhost:80/boot/plus`, { 
         const response = await fetch(`http://localhost/boot/plus`, {
             method: 'POST',

@@ -16,6 +16,6 @@ spec:
       containers:
       - name: boot-container
         image: sg0040/k8s_19_boot2:latest
-        imagePullPolicy: Always
+        imagePullPolicy: Always   ## docker hub에 있는 것을ㄹㄹ 가져온다.
         ports:
         - containerPort: 7777
